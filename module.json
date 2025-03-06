@@ -17,15 +17,24 @@
   "packs": [
     {
       "name": "rules",
-      "label": "Final Fantasy XIV Player Book",
+      "label": "Player Book",
       "type": "JournalEntry",
       "ownership": {
         "PLAYER": "OBSERVER"
       },
-      "banner": "modules/foundryvtt-final-fantasy-XIV-player-book/assets/player-book-folder2.webp"
+      "banner": "modules/foundryvtt-final-fantasy-XIV-player-book/assets/player-book-folder.webp"
     }
   ],
-
+  "packFolders": [
+    {
+      "name": "Final Fantasy XIV Player Book",
+      "color": "#4e2016",
+      "sorting": "m",
+      "packs": [
+        "rules"
+      ]
+    }
+  ],
   "url": "https://round-table.games/",
   "manifest": "https://github.com/geoidesic/foundryvtt-dnd5e-jump-calculator/releases/latest/download/module.json",
   "download": "https://github.com/geoidesic/foundryvtt-dnd5e-jump-calculator/releases/latest/download/module.zip",
