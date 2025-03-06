@@ -24,3 +24,11 @@ Hooks.once("ready", (app, html, data) => {
     new WelcomeApplication().render(true, { focus: true });
   }
 });
+
+Hooks.on('changeSidebarTab', (app) => {
+  log.d('changeSidebarTab', app);
+});
+
+Hooks.on('renderSidebarTab', (app, html, data) => {
+  log.d('renderSidebarTab', app, html, data);
+});

@@ -32,7 +32,8 @@
 <template lang="pug">
   ApplicationShell(bind:elementRoot)
     main
-      p Welcome
+      p Welcome to {MODULE_TITLE}
+      pre ho ho bob o
     footer
       p {MODULE_TITLE} is sponsored by 
       a(href="https://www.round-table.games") Round Table Games
