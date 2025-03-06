@@ -1,6 +1,6 @@
 {
-  "id": "foundryvtt-final-fantasy-player-book",
-  "title": "Final Fantasy XV Player Book",
+  "id": "foundryvtt-final-fantasy-XIV-player-book",
+  "title": "Final Fantasy XIV Player Book",
   "description": " Player Book",
   "version": "0.0.1",
   "styles": ["dist/style.css"],
@@ -14,7 +14,18 @@
       "flags": {}
     }
   ],
-  "packs": [],
+  "packs": [
+    {
+      "name": "rules",
+      "label": "Final Fantasy XIV Player Book",
+      "type": "JournalEntry",
+      "ownership": {
+        "PLAYER": "OBSERVER"
+      },
+      "banner": "modules/foundryvtt-final-fantasy-XIV-player-book/assets/player-book-folder2.webp"
+    }
+  ],
+
   "url": "https://round-table.games/",
   "manifest": "https://github.com/geoidesic/foundryvtt-dnd5e-jump-calculator/releases/latest/download/module.json",
   "download": "https://github.com/geoidesic/foundryvtt-dnd5e-jump-calculator/releases/latest/download/module.zip",
@@ -27,8 +38,8 @@
     }
   ],
   "compatibility": {
-    "minimum": "11",
-    "verified": "11.315",
+    "minimum": "12",
+    "verified": "12",
     "maximum": "12"
   },
   "flags": {
@@ -40,12 +51,12 @@
   "relationships": {
     "systems": [
       {
-        "id": "dnd5e",
+        "id": "foundryvtt-final-fantasy",
         "type": "system",
         "compatibility": {
-          "minimum": "3.0.0",
-          "verified": "3.1.0",
-          "maximum": "4"
+          "minimum": "0.0.1",
+          "verified": "1",
+          "maximum": "1"
         }
       }
     ]

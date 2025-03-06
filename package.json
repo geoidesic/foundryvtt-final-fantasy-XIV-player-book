@@ -40,7 +40,7 @@
     "not IE 11"
   ],
   "scripts": {
-    "dev": " > style.css; /* blank the style.css to enable HMR for css in dev */; vite;",
+    "dev": "echo '' > style.css && vite",
     "build": "vite build",
     "eslint": "eslint ."
   }
