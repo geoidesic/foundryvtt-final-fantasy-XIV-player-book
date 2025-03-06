@@ -614,7 +614,7 @@ pages:
         ability is used during another character’s turn, that character can
         continue their turn as soon as the instant ability’s eﬀect is
         resolved.</p><img
-        src="systems/foundryvtt-final-fantasy/assets/pages/instant-ability.webp"
+        src="modules/foundryvtt-final-fantasy-XIV-player-bookbook/assets/pages/instant-ability.webp"
         /><h2>Movement Effects</h2><p>Movement that occurs as a result of an
         ability’s eﬀect, a character trait, or an encounter mechanic is referred
         to as a movement eﬀect. This is considered distinct from standard
@@ -656,7 +656,7 @@ pages:
         character—cannot pass by the Sahagin without running afoul of their
         tridents. A large-sized character, however, could shove past them
         without issue.</p><img
-        src="systems/foundryvtt-final-fantasy/assets/pages/creature-space-occupied.webp"
+        src="modules/foundryvtt-final-fantasy-XIV-player-book/assets/pages/creature-space-occupied.webp"
         /><p>If resolving an eﬀect results in a situation where multiple
         characters end up in the same square, the GM will move one or more
         characters to the closest unoccupied square.</p><p>If a square is
@@ -751,7 +751,7 @@ pages:
         Magic Defense</p></li></ul><p>The CR for a unique ability’s check can be
         found in the ability’s description, in the scenario, or in the
         character’s traits.</p><img
-        src="systems/foundryvtt-final-fantasy/assets/pages/area-effects.webp"
+        src="modules/foundryvtt-final-fantasy-XIV-player-book/assets/pages/area-effects.webp"
         /><h3>Base Effect</h3><p>The eﬀect that is resolved when the ability is
         used. An ability’s base eﬀect is always fully resolved, unless something
         interrupts or otherwise negates the use of the ability
@@ -867,13 +867,13 @@ pages:
         square marker on the encounter map as specified in the ability’s
         description. In this instance, Eruption is the source of the marker, and
         Ifrit is the marker’s creator.</p><img
-        src="systems/foundryvtt-final-fantasy/assets/pages/marker-generated.webp"
+        src="modules/foundryvtt-final-fantasy-XIV-player-book/assets/pages/marker-generated.webp"
         alt="Ifrit uses Eruption, generating a marker " /><p><strong>Example
         2</strong>: To represent a collapsing ceiling inside of a crumbling
         mine, the GM places multiple markers on the encounter map to indicate
         danger areas where rocks will fall. In this case, the collapsing ceiling
         is the source of the markers, and there is no creator.</p><img
-        src="systems/foundryvtt-final-fantasy/assets/pages/rocks-generating-marker.webp"
+        src="modules/foundryvtt-final-fantasy-XIV-player-book/assets/pages/rocks-generating-marker.webp"
         alt="Rocks fall from the ceiling generating markers"
         /></blockquote><h4>Marker Type</h4><p>All markers are classified as
         mobile or stationary.</p><p>A mobile marker may change location or size
@@ -896,7 +896,7 @@ pages:
         eﬀect, or is otherwise repositioned due to a special game rule, the
         marker moves along with the character so that the 3x3 area is always
         centered on them.</p><img
-        src="systems/foundryvtt-final-fantasy/assets/pages/mobile-marker.webp"
+        src="modules/foundryvtt-final-fantasy-XIV-player-book/assets/pages/mobile-marker.webp"
         alt="mobile marker" width="200" height="200"
         /></blockquote><h4>Target</h4><p>The character, characters, or objects
         the marker aﬀects.</p><h4>Marker Trigger</h4><p>The conditions under
@@ -927,7 +927,7 @@ pages:
         now.</p></li><li><p><strong>Resolve Eﬀects</strong>: Resolve the eﬀect
         confirmed in step 6 for the marker’s target, targets, or all targets
         within the marker’s area of eﬀect.</p></li></ol><img
-        src="systems/foundryvtt-final-fantasy/assets/pages/sample-abilities.webp"
+        src="modules/foundryvtt-final-fantasy-XIV-player-book/assets/pages/sample-abilities.webp"
         alt="Sample abilities" /><p></p><h2>Phases</h2><p>A phase is a unit of
         time that helps govern an encounter. The length of a single phase can
         vary dramatically depending on how the encounter
