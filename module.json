@@ -1,7 +1,7 @@
 {
-  "id": "<MODULE_ID>",
-  "title": "<MODULE_TITLE>",
-  "description": "<MODULE_DESCRIPTION>",
+  "id": "foundryvtt-final-fantasy-player-book",
+  "title": "Final Fantasy XV Player Book",
+  "description": " Player Book",
   "version": "0.0.1",
   "styles": ["dist/style.css"],
   "esmodules": ["index.js"],
