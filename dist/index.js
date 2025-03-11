@@ -12175,42 +12175,101 @@ const MODULE_TITLE = "Final Fantasy XIV Player Book";
 const LOG_PREFIX = "FF15 Player Book |";
 function create_default_slot(ctx) {
   let main;
-  let p0;
-  let pre;
+  let img0;
+  let img0_src_value;
+  let div2;
+  let div0;
+  let input;
+  let div1;
+  let span;
   let footer;
-  let p1;
+  let div3;
+  let div4;
+  let h4;
   let a;
+  let mounted;
+  let dispose;
   return {
     c() {
       main = element("main");
-      p0 = element("p");
-      p0.textContent = `Welcome to ${MODULE_TITLE}`;
-      pre = element("pre");
-      pre.textContent = "ho ho bob o";
+      img0 = element("img");
+      div2 = element("div");
+      div0 = element("div");
+      input = element("input");
+      div1 = element("div");
+      span = element("span");
+      span.textContent = `${localize("FFXIV.Setting.DontShowWelcome.Name")}`;
       footer = element("footer");
-      p1 = element("p");
-      p1.textContent = `${MODULE_TITLE} is sponsored by `;
+      div3 = element("div");
+      div3.innerHTML = `<img class="pt-sm white svelte-r6l4kh" src="/systems/foundryvtt-final-fantasy/assets/round-table-games-logo.svg" alt="Round Table Games Logo" height="50" width="50" style="fill: white; border: none; width: auto;"/>`;
+      div4 = element("div");
+      h4 = element("h4");
+      h4.textContent = `${`${MODULE_TITLE}`}`;
       a = element("a");
-      a.textContent = "Round Table Games";
-      attr(main, "class", "svelte-1f5phzh");
+      a.textContent = "Round Table Games ©2025";
+      if (!src_url_equal(img0.src, img0_src_value = "/modules/" + MODULE_ID + "/assets/FFXIV-player-book-cover.webp")) attr(img0, "src", img0_src_value);
+      attr(img0, "alt", MODULE_TITLE);
+      attr(img0, "class", "svelte-r6l4kh");
+      attr(input, "type", "checkbox");
+      attr(input, "label", localize("FFXIV.Setting.DontShowWelcome.Name"));
+      attr(div0, "class", "flex0");
+      attr(div1, "class", "flex");
+      attr(div2, "class", "flexrow inset justify-vertical mb-sm");
+      attr(div2, "data-tooltip", localize("FFXIV.Setting.DontShowWelcome.Hint"));
+      attr(main, "class", "svelte-r6l4kh");
+      attr(div3, "class", "right");
       attr(a, "href", "https://www.round-table.games");
-      attr(a, "class", "svelte-1f5phzh");
-      attr(footer, "class", "svelte-1f5phzh");
+      attr(a, "class", "svelte-r6l4kh");
+      attr(div4, "class", "left pt-sm");
+      attr(footer, "class", "svelte-r6l4kh");
     },
     m(target, anchor) {
       insert(target, main, anchor);
-      append(main, p0);
-      append(main, pre);
+      append(main, img0);
+      append(main, div2);
+      append(div2, div0);
+      append(div0, input);
+      input.checked = /*dontShowWelcome*/
+      ctx[1];
+      append(div2, div1);
+      append(div1, span);
       insert(target, footer, anchor);
-      append(footer, p1);
-      append(footer, a);
+      append(footer, div3);
+      append(footer, div4);
+      append(div4, h4);
+      append(div4, a);
+      if (!mounted) {
+        dispose = [
+          listen(
+            input,
+            "change",
+            /*handleChange*/
+            ctx[2]
+          ),
+          listen(
+            input,
+            "change",
+            /*input_change_handler*/
+            ctx[4]
+          )
+        ];
+        mounted = true;
+      }
     },
-    p: noop,
+    p(ctx2, dirty) {
+      if (dirty & /*dontShowWelcome*/
+      2) {
+        input.checked = /*dontShowWelcome*/
+        ctx2[1];
+      }
+    },
     d(detaching) {
       if (detaching) {
         detach(main);
         detach(footer);
       }
+      mounted = false;
+      run_all(dispose);
     }
   };
 }
@@ -12219,7 +12278,7 @@ function create_fragment(ctx) {
   let updating_elementRoot;
   let current;
   function applicationshell_elementRoot_binding(value) {
-    ctx[3](value);
+    ctx[5](value);
   }
   let applicationshell_props = {
     $$slots: { default: [create_default_slot] },
@@ -12244,8 +12303,8 @@ function create_fragment(ctx) {
     },
     p(ctx2, [dirty]) {
       const applicationshell_changes = {};
-      if (dirty & /*$$scope*/
-      128) {
+      if (dirty & /*$$scope, dontShowWelcome*/
+      130) {
         applicationshell_changes.$$scope = { dirty, ctx: ctx2 };
       }
       if (!updating_elementRoot && dirty & /*elementRoot*/
@@ -12272,47 +12331,53 @@ function create_fragment(ctx) {
   };
 }
 function instance($$self, $$props, $$invalidate) {
+  let dontShowWelcome2;
   let { elementRoot = void 0 } = $$props;
-  let { version: version2 = void 0 } = $$props;
   const application = getContext("#external").application;
+  const handleChange = (event) => {
+    game.settings.set(MODULE_ID, "dontShowWelcome", event.target.checked);
+  };
   let draggable2 = application.reactive.draggable;
   draggable2 = true;
   onMount(async () => {
   });
+  function input_change_handler() {
+    dontShowWelcome2 = this.checked;
+    $$invalidate(1, dontShowWelcome2);
+  }
   function applicationshell_elementRoot_binding(value) {
     elementRoot = value;
     $$invalidate(0, elementRoot);
   }
   $$self.$$set = ($$props2) => {
     if ("elementRoot" in $$props2) $$invalidate(0, elementRoot = $$props2.elementRoot);
-    if ("version" in $$props2) $$invalidate(1, version2 = $$props2.version);
   };
   $$self.$$.update = () => {
     if ($$self.$$.dirty & /*draggable*/
-    4) {
+    8) {
       application.reactive.draggable = draggable2;
     }
   };
-  game.settings.get(MODULE_ID, "dontShowWelcome");
-  return [elementRoot, version2, draggable2, applicationshell_elementRoot_binding];
+  $$invalidate(1, dontShowWelcome2 = game.settings.get(MODULE_ID, "dontShowWelcome"));
+  return [
+    elementRoot,
+    dontShowWelcome2,
+    handleChange,
+    draggable2,
+    input_change_handler,
+    applicationshell_elementRoot_binding
+  ];
 }
 class WelcomeAppShell extends SvelteComponent {
   constructor(options) {
     super();
-    init(this, options, instance, create_fragment, safe_not_equal, { elementRoot: 0, version: 1 });
+    init(this, options, instance, create_fragment, safe_not_equal, { elementRoot: 0 });
   }
   get elementRoot() {
     return this.$$.ctx[0];
   }
   set elementRoot(elementRoot) {
     this.$$set({ elementRoot });
-    flush();
-  }
-  get version() {
-    return this.$$.ctx[1];
-  }
-  set version(version2) {
-    this.$$set({ version: version2 });
     flush();
   }
 }
@@ -14321,11 +14386,11 @@ class WelcomeApplication extends SvelteApplication {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       id: `${MODULE_ID}-welcome`,
-      classes: ["<s_SVELTE_HASH_ID>"],
+      classes: ["no-padding"],
       resizable: true,
       minimizable: true,
-      width: 220,
-      height: 400,
+      width: 502,
+      height: 841,
       // headerIcon: 'path/to/img.svg',
       title: game.i18n.localize(`${MODULE_TITLE} v${version}`),
       svelte: {

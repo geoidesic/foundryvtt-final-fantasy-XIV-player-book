@@ -17,11 +17,11 @@ export default class WelcomeApplication extends SvelteApplication
    {
       return foundry.utils.mergeObject(super.defaultOptions, {
         id: `${MODULE_ID}-welcome`,
-        classes: ['<s_SVELTE_HASH_ID>'],
+        classes: ['no-padding'],
          resizable: true,
          minimizable: true,
-         width: 220,
-         height: 400,
+         width: 502,
+         height: 841,
          // headerIcon: 'path/to/img.svg',
          title: game.i18n.localize(`${MODULE_TITLE} v${version}`),
          svelte: {
