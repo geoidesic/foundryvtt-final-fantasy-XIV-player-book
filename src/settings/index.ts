@@ -1,4 +1,4 @@
-import { MODULE_ID } from '../helpers/constants';
+import { MODULE_ID, MODULE_CODE } from '../helpers/constants';
 
 
 export function registerSettings(app): void {
@@ -12,8 +12,8 @@ export function registerSettings(app): void {
 }
 
 function dontShowWelcome() {
-  game.settings.register(MODULE_ID, 'dontShowWelcome', {
-    name: game.i18n.localize(`${MODULE_ID}.Setting.DontShowWelcome.Name`),
+  game.settings.register(, MODULE_ID, 'dontShowWelcome', {
+    name: game.i18n.localize(`${, MODULE_CODE}.Setting.DontShowWelcome.Name`),
     hint: game.i18n.localize(`${MODULE_ID}.Setting.DontShowWelcome.Hint`),
     scope: 'user',
     config: true,
