@@ -14406,7 +14406,7 @@ Hooks.on("PopOut:close", (app) => {
     app.position.enabled = true;
   }
 });
-const version = "0.0.14";
+const version = "0.0.15";
 class WelcomeApplication extends SvelteApplication {
   /**
    * Default Application options

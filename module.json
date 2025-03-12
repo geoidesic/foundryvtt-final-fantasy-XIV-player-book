@@ -2,7 +2,7 @@
   "id": "foundryvtt-final-fantasy-XIV-player-book",
   "title": "Final Fantasy XIV Player Book",
   "description": " Player Book",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "styles": [
     "dist/style.css"
   ],
