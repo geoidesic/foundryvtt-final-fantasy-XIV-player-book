@@ -2,7 +2,7 @@
   import { onMount, getContext } from "svelte";
   import { fade, scale }        from 'svelte/transition';
   import { ApplicationShell }   from '#runtime/svelte/component/core';
-  import { localize } from "#runtime/svelte/helper";
+  import { localize } from "~/src/helpers/utility";
   import { MODULE_ID, MODULE_TITLE } from "~/src/helpers/constants";
 
   export let elementRoot = void 0;
@@ -32,11 +32,11 @@
   ApplicationShell(bind:elementRoot)
     main
       img(src="/modules/{MODULE_ID}/assets/FFXIV-player-book-cover.webp" alt="{MODULE_TITLE}") 
-      .flexrow.inset.justify-vertical.mb-sm(data-tooltip="{localize('FFXIV.Setting.DontShowWelcome.Hint')}")
+      .flexrow.inset.justify-vertical.mb-sm(data-tooltip="{localize('Setting.DontShowWelcome.Hint')}")
         .flex0
-          input(type="checkbox" on:change="{handleChange}" label="{localize('FFXIV.Setting.DontShowWelcome.Name')}" bind:checked="{dontShowWelcome}") 
+          input(type="checkbox" on:change="{handleChange}" label="{localize('Setting.DontShowWelcome.Name')}" bind:checked="{dontShowWelcome}") 
         .flex
-          span {localize('FFXIV.Setting.DontShowWelcome.Name')}
+          span {localize('Setting.DontShowWelcome.Name')}
     footer
       .right
         img.pt-sm.white(src="/systems/foundryvtt-final-fantasy/assets/round-table-games-logo.svg" alt="Round Table Games Logo" height="50" width="50" style="fill: white; border: none; width: auto;")
