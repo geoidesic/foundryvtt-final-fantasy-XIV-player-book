@@ -2007,7 +2007,7 @@ ${JSON.stringify(config)}`
   }
   return {};
 }
-function localize(stringId, data) {
+function localize$1(stringId, data) {
   const result = !isObject(data) ? globalThis.game.i18n.localize(stringId) : globalThis.game.i18n.format(stringId, data);
   return result !== void 0 ? result : "";
 }
@@ -10203,7 +10203,7 @@ function instance$5($$self, $$props, $$invalidate) {
   $$self.$$.update = () => {
     if ($$self.$$.dirty & /*button*/
     1) {
-      $$invalidate(9, title = isObject(button) && typeof button.title === "string" ? localize(button.title) : "");
+      $$invalidate(9, title = isObject(button) && typeof button.title === "string" ? localize$1(button.title) : "");
     }
     if ($$self.$$.dirty & /*button, title*/
     513) {
@@ -10211,7 +10211,7 @@ function instance$5($$self, $$props, $$invalidate) {
     }
     if ($$self.$$.dirty & /*button*/
     1) {
-      $$invalidate(3, label = isObject(button) && typeof button.label === "string" ? localize(button.label) : void 0);
+      $$invalidate(3, label = isObject(button) && typeof button.label === "string" ? localize$1(button.label) : void 0);
     }
     if ($$self.$$.dirty & /*button*/
     1) {
@@ -10464,7 +10464,7 @@ function create_key_block(ctx) {
   let header;
   let t0;
   let h4;
-  let t1_value = localize(
+  let t1_value = localize$1(
     /*$storeTitle*/
     ctx[7]
   ) + "";
@@ -10591,7 +10591,7 @@ function create_key_block(ctx) {
         if_block = null;
       }
       if ((!current || dirty[0] & /*$storeTitle*/
-      128) && t1_value !== (t1_value = localize(
+      128) && t1_value !== (t1_value = localize$1(
         /*$storeTitle*/
         ctx2[7]
       ) + "")) set_data(t1, t1_value);
@@ -12171,8 +12171,39 @@ cssVariables.setProperties({
   "--tjs-app-background": `url("${globalThis.foundry.utils.getRoute("/ui/denim075.png")}")`
 }, false);
 const MODULE_ID = "foundryvtt-final-fantasy-XIV-player-book";
+const MODULE_CODE = "FFXIV-PB";
 const MODULE_TITLE = "Final Fantasy XIV Player Book";
 const LOG_PREFIX = "FF15 Player Book |";
+const log = {
+  ASSERT: 1,
+  ERROR: 2,
+  WARN: 3,
+  INFO: 4,
+  DEBUG: 5,
+  VERBOSE: 6,
+  set level(level) {
+    this.a = level >= this.ASSERT ? console.assert.bind(window.console, LOG_PREFIX) : () => {
+    };
+    this.e = level >= this.ERROR ? console.error.bind(window.console, LOG_PREFIX) : () => {
+    };
+    this.w = level >= this.WARN ? console.warn.bind(window.console, LOG_PREFIX) : () => {
+    };
+    this.i = level >= this.INFO ? console.info.bind(window.console, LOG_PREFIX) : () => {
+    };
+    this.d = level >= this.DEBUG ? console.debug.bind(window.console, LOG_PREFIX) : () => {
+    };
+    this.v = level >= this.VERBOSE ? console.log.bind(window.console, LOG_PREFIX) : () => {
+    };
+    this.loggingLevel = level;
+  },
+  get level() {
+    return this.loggingLevel;
+  }
+};
+function localize(string) {
+  console.log("[FFXIVA] | [UTIL] localize", MODULE_CODE, string);
+  return game.i18n.localize(`${MODULE_CODE}.${string}`);
+}
 function create_default_slot(ctx) {
   let main;
   let img0;
@@ -12198,7 +12229,7 @@ function create_default_slot(ctx) {
       input = element("input");
       div1 = element("div");
       span = element("span");
-      span.textContent = `${localize("FFXIV.Setting.DontShowWelcome.Name")}`;
+      span.textContent = `${localize("Setting.DontShowWelcome.Name")}`;
       footer = element("footer");
       div3 = element("div");
       div3.innerHTML = `<img class="pt-sm white svelte-r6l4kh" src="/systems/foundryvtt-final-fantasy/assets/round-table-games-logo.svg" alt="Round Table Games Logo" height="50" width="50" style="fill: white; border: none; width: auto;"/>`;
@@ -12211,11 +12242,11 @@ function create_default_slot(ctx) {
       attr(img0, "alt", MODULE_TITLE);
       attr(img0, "class", "svelte-r6l4kh");
       attr(input, "type", "checkbox");
-      attr(input, "label", localize("FFXIV.Setting.DontShowWelcome.Name"));
+      attr(input, "label", localize("Setting.DontShowWelcome.Name"));
       attr(div0, "class", "flex0");
       attr(div1, "class", "flex");
       attr(div2, "class", "flexrow inset justify-vertical mb-sm");
-      attr(div2, "data-tooltip", localize("FFXIV.Setting.DontShowWelcome.Hint"));
+      attr(div2, "data-tooltip", localize("Setting.DontShowWelcome.Hint"));
       attr(main, "class", "svelte-r6l4kh");
       attr(div3, "class", "right");
       attr(a, "href", "https://www.round-table.games");
@@ -14375,7 +14406,7 @@ Hooks.on("PopOut:close", (app) => {
     app.position.enabled = true;
   }
 });
-const version = "0.0.6";
+const version = "0.0.13";
 class WelcomeApplication extends SvelteApplication {
   /**
    * Default Application options
@@ -14405,56 +14436,29 @@ class WelcomeApplication extends SvelteApplication {
     });
   }
 }
-const log$1 = {
-  ASSERT: 1,
-  ERROR: 2,
-  WARN: 3,
-  INFO: 4,
-  DEBUG: 5,
-  VERBOSE: 6,
-  set level(level) {
-    this.a = level >= this.ASSERT ? console.assert.bind(window.console, LOG_PREFIX) : () => {
-    };
-    this.e = level >= this.ERROR ? console.error.bind(window.console, LOG_PREFIX) : () => {
-    };
-    this.w = level >= this.WARN ? console.warn.bind(window.console, LOG_PREFIX) : () => {
-    };
-    this.i = level >= this.INFO ? console.info.bind(window.console, LOG_PREFIX) : () => {
-    };
-    this.d = level >= this.DEBUG ? console.debug.bind(window.console, LOG_PREFIX) : () => {
-    };
-    this.v = level >= this.VERBOSE ? console.log.bind(window.console, LOG_PREFIX) : () => {
-    };
-    this.loggingLevel = level;
-  },
-  get level() {
-    return this.loggingLevel;
-  }
-};
 function registerSettings(app) {
-  log.i("Building module settings");
   dontShowWelcome();
 }
 function dontShowWelcome() {
   game.settings.register(MODULE_ID, "dontShowWelcome", {
-    name: game.i18n.localize(`${MODULE_ID}.Setting.DontShowWelcome.Name`),
-    hint: game.i18n.localize(`${MODULE_ID}.Setting.DontShowWelcome.Hint`),
+    name: game.i18n.localize(`${MODULE_CODE}.Setting.DontShowWelcome.Name`),
+    hint: game.i18n.localize(`${MODULE_CODE}.Setting.DontShowWelcome.Hint`),
     scope: "user",
     config: true,
     default: false,
     type: Boolean
   });
 }
-window.log = log$1;
-log$1.level = log$1.DEBUG;
+window.log = log;
+log.level = log.DEBUG;
 Hooks.once("init", (app, html, data) => {
-  log$1.i("Initialising");
+  log.i("Initialising");
   CONFIG.debug.hooks = true;
   registerSettings();
 });
 Hooks.once("ready", (app, html, data) => {
   if (!game.modules.get(MODULE_ID).active) {
-    log$1.w("Module is not active");
+    log.w("Module is not active");
     return;
   }
   if (!game.settings.get(MODULE_ID, "dontShowWelcome")) {
@@ -14462,9 +14466,9 @@ Hooks.once("ready", (app, html, data) => {
   }
 });
 Hooks.on("changeSidebarTab", (app) => {
-  log$1.d("changeSidebarTab", app);
+  log.d("changeSidebarTab", app);
 });
 Hooks.on("renderSidebarTab", (app, html, data) => {
-  log$1.d("renderSidebarTab", app, html, data);
+  log.d("renderSidebarTab", app, html, data);
 });
 //# sourceMappingURL=index.js.map
