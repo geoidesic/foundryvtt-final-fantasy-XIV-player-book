@@ -94,6 +94,6 @@ export const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
  * @return {string} The localized string
  */
 export function localize(string) {
-  console.log("[FFXIVA] | [UTIL] localize", MODULE_CODE, string);
+  if (typeof game === 'undefined') return string; //- avoid lint error
   return game.i18n.localize(`${MODULE_CODE}.${string}`);
 }

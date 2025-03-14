@@ -32,7 +32,7 @@
   ApplicationShell(bind:elementRoot)
     main
       img(src="/modules/{MODULE_ID}/assets/FFXIV-player-book-cover.webp" alt="{MODULE_TITLE}") 
-      .flexrow.inset.justify-vertical.mb-sm(data-tooltip="{localize('Setting.DontShowWelcome.Hint')}")
+      .flexrow.inset.justify-vertical.mb-sm.dont-show(data-tooltip="{localize('Setting.DontShowWelcome.Hint')}")
         .flex0
           input(type="checkbox" on:change="{handleChange}" label="{localize('Setting.DontShowWelcome.Name')}" bind:checked="{dontShowWelcome}") 
         .flex
@@ -42,7 +42,7 @@
         img.pt-sm.white(src="/systems/foundryvtt-final-fantasy/assets/round-table-games-logo.svg" alt="Round Table Games Logo" height="50" width="50" style="fill: white; border: none; width: auto;")
       .left.pt-sm
         h4 {`${MODULE_TITLE}`}
-        a(href="https://www.round-table.games") Round Table Games ©2025
+        a(href="https://www.round-table.games") Round Table Games
 
 </template>
 
@@ -58,6 +58,10 @@
       height: 860
       object-fit: cover
 
+  .dont-show
+    font-size: smaller
+    input
+      cursor: pointer
 
   .white
     filter: invert(1)
