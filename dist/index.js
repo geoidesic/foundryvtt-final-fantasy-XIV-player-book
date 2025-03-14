@@ -12201,7 +12201,7 @@ const log = {
   }
 };
 function localize(string) {
-  console.log("[FFXIVA] | [UTIL] localize", MODULE_CODE, string);
+  if (typeof game === "undefined") return string;
   return game.i18n.localize(`${MODULE_CODE}.${string}`);
 }
 function create_default_slot(ctx) {
@@ -12232,27 +12232,28 @@ function create_default_slot(ctx) {
       span.textContent = `${localize("Setting.DontShowWelcome.Name")}`;
       footer = element("footer");
       div3 = element("div");
-      div3.innerHTML = `<img class="pt-sm white svelte-r6l4kh" src="/systems/foundryvtt-final-fantasy/assets/round-table-games-logo.svg" alt="Round Table Games Logo" height="50" width="50" style="fill: white; border: none; width: auto;"/>`;
+      div3.innerHTML = `<img class="pt-sm white svelte-1p9ueqj" src="/systems/foundryvtt-final-fantasy/assets/round-table-games-logo.svg" alt="Round Table Games Logo" height="50" width="50" style="fill: white; border: none; width: auto;"/>`;
       div4 = element("div");
       h4 = element("h4");
       h4.textContent = `${`${MODULE_TITLE}`}`;
       a = element("a");
-      a.textContent = "Round Table Games ©2025";
+      a.textContent = "Round Table Games";
       if (!src_url_equal(img0.src, img0_src_value = "/modules/" + MODULE_ID + "/assets/FFXIV-player-book-cover.webp")) attr(img0, "src", img0_src_value);
       attr(img0, "alt", MODULE_TITLE);
-      attr(img0, "class", "svelte-r6l4kh");
+      attr(img0, "class", "svelte-1p9ueqj");
       attr(input, "type", "checkbox");
       attr(input, "label", localize("Setting.DontShowWelcome.Name"));
+      attr(input, "class", "svelte-1p9ueqj");
       attr(div0, "class", "flex0");
       attr(div1, "class", "flex");
-      attr(div2, "class", "flexrow inset justify-vertical mb-sm");
+      attr(div2, "class", "flexrow inset justify-vertical mb-sm dont-show svelte-1p9ueqj");
       attr(div2, "data-tooltip", localize("Setting.DontShowWelcome.Hint"));
-      attr(main, "class", "svelte-r6l4kh");
+      attr(main, "class", "svelte-1p9ueqj");
       attr(div3, "class", "right");
       attr(a, "href", "https://www.round-table.games");
-      attr(a, "class", "svelte-r6l4kh");
+      attr(a, "class", "svelte-1p9ueqj");
       attr(div4, "class", "left pt-sm");
-      attr(footer, "class", "svelte-r6l4kh");
+      attr(footer, "class", "svelte-1p9ueqj");
     },
     m(target, anchor) {
       insert(target, main, anchor);
@@ -14406,7 +14407,7 @@ Hooks.on("PopOut:close", (app) => {
     app.position.enabled = true;
   }
 });
-const version = "0.0.15";
+const version = "0.0.16";
 class WelcomeApplication extends SvelteApplication {
   /**
    * Default Application options
@@ -14453,7 +14454,6 @@ window.log = log;
 log.level = log.DEBUG;
 Hooks.once("init", (app, html, data) => {
   log.i("Initialising");
-  CONFIG.debug.hooks = true;
   registerSettings();
 });
 Hooks.once("ready", (app, html, data) => {
