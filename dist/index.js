@@ -14732,7 +14732,7 @@ Hooks.on("PopOut:close", (app) => {
     app.position.enabled = true;
   }
 });
-const version = "0.0.19";
+const version = "0.0.20";
 class WelcomeApplication extends SvelteApplication {
   static {
     __name(this, "WelcomeApplication");
@@ -14750,7 +14750,7 @@ class WelcomeApplication extends SvelteApplication {
       resizable: true,
       minimizable: true,
       width: 502,
-      height: 836,
+      height: 835,
       headerIcon: "systems/foundryvtt-final-fantasy/assets/aardvark-claw.webp",
       title: game.i18n.localize(`${MODULE_TITLE} v${version}`),
       svelte: {
