@@ -32,8 +32,7 @@
   ApplicationShell(bind:elementRoot)
     main.relative
       img(src="/modules/{MODULE_ID}/assets/FFXIV-player-book-cover.webp" alt="{MODULE_TITLE}")
-      p.smallest.lightest.disclaimer {localize('Setting.DontShowWelcome.Disclaimer')}
-      .flexrow.dont-show.justify-vertical.mt-sm(data-tooltip="{localize('Setting.DontShowWelcome.Hint')}")
+      .flexrow.dont-show.justify-vertical(data-tooltip="{localize('Setting.DontShowWelcome.Hint')}")
         .flex0
           input(type="checkbox" on:change="{handleChange}" label="{localize('Setting.DontShowWelcome.Name')}" bind:checked="{dontShowWelcome}") 
         .flex
@@ -46,6 +45,7 @@
         .smaller
           span Foundry conversion by 
           a(href="https://www.aardvark.games") Aardvark Games
+    p.smallest.lightest.disclaimer {localize('Setting.DontShowWelcome.Disclaimer')}
 
 </template>
 
@@ -76,7 +76,6 @@
     color: #b4975c
     padding: 0 3em
   footer
-    border-top: 8px ridge var(--border-shadow)
     display: grid
     grid-column-gap: 1rem
     grid-template-columns: 1fr 2fr
@@ -87,9 +86,9 @@
     background-color: #333
     color: white
     text-align: center
-    padding: 1em 1em 0.5em 1em
+    padding: 0.5em 1em 1em  1em
     font-size: 0.8em
-    line-height: 1.5em
+    line-height: 1.2em
     z-index: 3
     a
       color: white
