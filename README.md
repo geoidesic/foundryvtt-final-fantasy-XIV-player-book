@@ -1,8 +1,4 @@
-# foundryvtt-TJS-module-template
-A repo template for creating new modules based on Svelte via TJS
-
-# Usage
-- Create a repo from this template
-- Clone it to your dev env
-- Edit package.json and module.json
-- Edit the placeholders in `helpers/constants.ts`
+# Final Fantasy FoundryVTT Player Book
+This module is a community project that was able to be built by @geoidesic thanks to donations by brothersharp https://www.youtube.com/c/BrotherSharp
+This module is not affiliated with Square Enix or Final Fantasy XIV. All trademarks and copyrights are property of their respective owners.
+@geoidesic is launching a new service for those who would like to see their creations come to life in FoundryVTT: https://aardvark.games
