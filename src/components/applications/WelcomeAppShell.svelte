@@ -30,20 +30,22 @@
 
 <template lang="pug">
   ApplicationShell(bind:elementRoot)
-    main
-      img(src="/modules/{MODULE_ID}/assets/FFXIV-player-book-cover.webp" alt="{MODULE_TITLE}") 
-      .flexrow.inset.justify-vertical.mb-sm.dont-show(data-tooltip="{localize('Setting.DontShowWelcome.Hint')}")
+    main.relative
+      img(src="/modules/{MODULE_ID}/assets/FFXIV-player-book-cover.webp" alt="{MODULE_TITLE}")
+      p.smallest.lightest.disclaimer {localize('Setting.DontShowWelcome.Disclaimer')}
+      .flexrow.dont-show.justify-vertical.mt-sm(data-tooltip="{localize('Setting.DontShowWelcome.Hint')}")
         .flex0
           input(type="checkbox" on:change="{handleChange}" label="{localize('Setting.DontShowWelcome.Name')}" bind:checked="{dontShowWelcome}") 
         .flex
-          span {localize('Setting.DontShowWelcome.Name')}
+          span {localize('Setting.DontShowWelcome.Name')} 
     footer
       .right
         img.pt-sm.mr-md(src="/systems/foundryvtt-final-fantasy/assets/aardvark-logo.webp" alt="Aardvark Logo" height="40" width="40" style="fill: white; border: none; width: auto;")
       .left.pt-sm
         h4 {MODULE_TITLE} 
-        span Foundry conversion by 
-        a(href="https://www.aardvark.games") Aardvark Games
+        .smaller
+          span Foundry conversion by 
+          a(href="https://www.aardvark.games") Aardvark Games
 
 </template>
 
@@ -66,7 +68,13 @@
 
   .white
     filter: invert(1)
-    
+
+  .disclaimer
+    position: absolute
+    bottom: 120px
+    left: 0
+    color: #b4975c
+    padding: 0 3em
   footer
     border-top: 8px ridge var(--border-shadow)
     display: grid

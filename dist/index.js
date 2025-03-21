@@ -12488,6 +12488,7 @@ function create_default_slot(ctx) {
   let main;
   let img0;
   let img0_src_value;
+  let p;
   let div2;
   let div0;
   let input;
@@ -12495,52 +12496,52 @@ function create_default_slot(ctx) {
   let span0;
   let footer;
   let div3;
-  let div4;
+  let div5;
   let h4;
-  let span1;
-  let a;
+  let div4;
   let mounted;
   let dispose;
   return {
     c() {
       main = element("main");
       img0 = element("img");
+      p = element("p");
+      p.textContent = `${localize("Setting.DontShowWelcome.Disclaimer")}`;
       div2 = element("div");
       div0 = element("div");
       input = element("input");
       div1 = element("div");
       span0 = element("span");
-      span0.textContent = `${localize("Setting.DontShowWelcome.Name")}`;
+      span0.textContent = `${localize("Setting.DontShowWelcome.Name")} `;
       footer = element("footer");
       div3 = element("div");
       div3.innerHTML = `<img class="pt-sm mr-md" src="/systems/foundryvtt-final-fantasy/assets/aardvark-logo.webp" alt="Aardvark Logo" height="40" width="40" style="fill: white; border: none; width: auto;"/>`;
-      div4 = element("div");
+      div5 = element("div");
       h4 = element("h4");
       h4.textContent = `${MODULE_TITLE} `;
-      span1 = element("span");
-      span1.textContent = "Foundry conversion by ";
-      a = element("a");
-      a.textContent = "Aardvark Games";
+      div4 = element("div");
+      div4.innerHTML = `<span>Foundry conversion by </span><a href="https://www.aardvark.games" class="svelte-fkv1wj">Aardvark Games</a>`;
       if (!src_url_equal(img0.src, img0_src_value = "/modules/" + MODULE_ID + "/assets/FFXIV-player-book-cover.webp")) attr(img0, "src", img0_src_value);
       attr(img0, "alt", MODULE_TITLE);
-      attr(img0, "class", "svelte-1owu5zo");
+      attr(img0, "class", "svelte-fkv1wj");
+      attr(p, "class", "smallest lightest disclaimer svelte-fkv1wj");
       attr(input, "type", "checkbox");
       attr(input, "label", localize("Setting.DontShowWelcome.Name"));
-      attr(input, "class", "svelte-1owu5zo");
+      attr(input, "class", "svelte-fkv1wj");
       attr(div0, "class", "flex0");
       attr(div1, "class", "flex");
-      attr(div2, "class", "flexrow inset justify-vertical mb-sm dont-show svelte-1owu5zo");
+      attr(div2, "class", "flexrow dont-show justify-vertical mt-sm svelte-fkv1wj");
       attr(div2, "data-tooltip", localize("Setting.DontShowWelcome.Hint"));
-      attr(main, "class", "svelte-1owu5zo");
+      attr(main, "class", "relative svelte-fkv1wj");
       attr(div3, "class", "right");
-      attr(a, "href", "https://www.aardvark.games");
-      attr(a, "class", "svelte-1owu5zo");
-      attr(div4, "class", "left pt-sm");
-      attr(footer, "class", "svelte-1owu5zo");
+      attr(div4, "class", "smaller");
+      attr(div5, "class", "left pt-sm");
+      attr(footer, "class", "svelte-fkv1wj");
     },
     m(target, anchor) {
       insert(target, main, anchor);
       append(main, img0);
+      append(main, p);
       append(main, div2);
       append(div2, div0);
       append(div0, input);
@@ -12550,10 +12551,9 @@ function create_default_slot(ctx) {
       append(div1, span0);
       insert(target, footer, anchor);
       append(footer, div3);
-      append(footer, div4);
-      append(div4, h4);
-      append(div4, span1);
-      append(div4, a);
+      append(footer, div5);
+      append(div5, h4);
+      append(div5, div4);
       if (!mounted) {
         dispose = [
           listen(
@@ -14732,7 +14732,7 @@ Hooks.on("PopOut:close", (app) => {
     app.position.enabled = true;
   }
 });
-const version = "0.0.18";
+const version = "0.0.19";
 class WelcomeApplication extends SvelteApplication {
   static {
     __name(this, "WelcomeApplication");
