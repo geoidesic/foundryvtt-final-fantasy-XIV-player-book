@@ -1,6 +1,9 @@
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
 function noop() {
 }
-const identity = (x) => x;
+__name(noop, "noop");
+const identity = /* @__PURE__ */ __name((x) => x, "identity");
 function assign(tar, src) {
   for (const k in src) tar[k] = src[k];
   return (
@@ -8,21 +11,27 @@ function assign(tar, src) {
     tar
   );
 }
+__name(assign, "assign");
 function run(fn) {
   return fn();
 }
+__name(run, "run");
 function blank_object() {
   return /* @__PURE__ */ Object.create(null);
 }
+__name(blank_object, "blank_object");
 function run_all(fns) {
   fns.forEach(run);
 }
+__name(run_all, "run_all");
 function is_function(thing) {
   return typeof thing === "function";
 }
+__name(is_function, "is_function");
 function safe_not_equal(a, b) {
   return a != a ? b == b : a !== b || a && typeof a === "object" || typeof a === "function";
 }
+__name(safe_not_equal, "safe_not_equal");
 let src_url_equal_anchor;
 function src_url_equal(element_src, url) {
   if (element_src === url) return true;
@@ -32,9 +41,11 @@ function src_url_equal(element_src, url) {
   src_url_equal_anchor.href = url;
   return element_src === src_url_equal_anchor.href;
 }
+__name(src_url_equal, "src_url_equal");
 function is_empty(obj) {
   return Object.keys(obj).length === 0;
 }
+__name(is_empty, "is_empty");
 function subscribe(store, ...callbacks) {
   if (store == null) {
     for (const callback of callbacks) {
@@ -45,33 +56,40 @@ function subscribe(store, ...callbacks) {
   const unsub = store.subscribe(...callbacks);
   return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
 }
+__name(subscribe, "subscribe");
 function get_store_value(store) {
   let value;
   subscribe(store, (_) => value = _)();
   return value;
 }
+__name(get_store_value, "get_store_value");
 function component_subscribe(component, store, callback) {
   component.$$.on_destroy.push(subscribe(store, callback));
 }
+__name(component_subscribe, "component_subscribe");
 function create_slot(definition, ctx, $$scope, fn) {
   if (definition) {
     const slot_ctx = get_slot_context(definition, ctx, $$scope, fn);
     return definition[0](slot_ctx);
   }
 }
+__name(create_slot, "create_slot");
 function get_slot_context(definition, ctx, $$scope, fn) {
   return definition[1] && fn ? assign($$scope.ctx.slice(), definition[1](fn(ctx))) : $$scope.ctx;
 }
+__name(get_slot_context, "get_slot_context");
 function get_slot_changes(definition, $$scope, dirty, fn) {
   if (definition[2] && fn) ;
   return $$scope.dirty;
 }
+__name(get_slot_changes, "get_slot_changes");
 function update_slot_base(slot, slot_definition, ctx, $$scope, slot_changes, get_slot_context_fn) {
   if (slot_changes) {
     const slot_context = get_slot_context(slot_definition, ctx, $$scope, get_slot_context_fn);
     slot.p(slot_context, slot_changes);
   }
 }
+__name(update_slot_base, "update_slot_base");
 function get_all_dirty_from_scope($$scope) {
   if ($$scope.ctx.length > 32) {
     const dirty = [];
@@ -83,9 +101,11 @@ function get_all_dirty_from_scope($$scope) {
   }
   return -1;
 }
+__name(get_all_dirty_from_scope, "get_all_dirty_from_scope");
 function action_destroyer(action_result) {
   return action_result && is_function(action_result.destroy) ? action_result.destroy : noop;
 }
+__name(action_destroyer, "action_destroyer");
 const is_client = typeof window !== "undefined";
 let now = is_client ? () => window.performance.now() : () => Date.now();
 let raf = is_client ? (cb) => requestAnimationFrame(cb) : noop;
@@ -99,6 +119,7 @@ function run_tasks(now2) {
   });
   if (tasks.size !== 0) raf(run_tasks);
 }
+__name(run_tasks, "run_tasks");
 function loop(callback) {
   let task;
   if (tasks.size === 0) raf(run_tasks);
@@ -111,9 +132,11 @@ function loop(callback) {
     }
   };
 }
+__name(loop, "loop");
 function append(target, node) {
   target.appendChild(node);
 }
+__name(append, "append");
 function get_root_for_style(node) {
   if (!node) return document;
   const root = node.getRootNode ? node.getRootNode() : node.ownerDocument;
@@ -126,12 +149,14 @@ function get_root_for_style(node) {
   }
   return node.ownerDocument;
 }
+__name(get_root_for_style, "get_root_for_style");
 function append_empty_stylesheet(node) {
   const style_element = element("style");
   style_element.textContent = "/* empty */";
   append_stylesheet(get_root_for_style(node), style_element);
   return style_element.sheet;
 }
+__name(append_empty_stylesheet, "append_empty_stylesheet");
 function append_stylesheet(node, style) {
   append(
     /** @type {Document} */
@@ -140,63 +165,78 @@ function append_stylesheet(node, style) {
   );
   return style.sheet;
 }
+__name(append_stylesheet, "append_stylesheet");
 function insert(target, node, anchor) {
   target.insertBefore(node, anchor || null);
 }
+__name(insert, "insert");
 function detach(node) {
   if (node.parentNode) {
     node.parentNode.removeChild(node);
   }
 }
+__name(detach, "detach");
 function destroy_each(iterations, detaching) {
   for (let i = 0; i < iterations.length; i += 1) {
     if (iterations[i]) iterations[i].d(detaching);
   }
 }
+__name(destroy_each, "destroy_each");
 function element(name) {
   return document.createElement(name);
 }
+__name(element, "element");
 function svg_element(name) {
   return document.createElementNS("http://www.w3.org/2000/svg", name);
 }
+__name(svg_element, "svg_element");
 function text(data) {
   return document.createTextNode(data);
 }
+__name(text, "text");
 function space() {
   return text(" ");
 }
+__name(space, "space");
 function empty() {
   return text("");
 }
+__name(empty, "empty");
 function listen(node, event, handler, options) {
   node.addEventListener(event, handler, options);
   return () => node.removeEventListener(event, handler, options);
 }
+__name(listen, "listen");
 function prevent_default(fn) {
   return function(event) {
     event.preventDefault();
     return fn.call(this, event);
   };
 }
+__name(prevent_default, "prevent_default");
 function stop_propagation(fn) {
   return function(event) {
     event.stopPropagation();
     return fn.call(this, event);
   };
 }
+__name(stop_propagation, "stop_propagation");
 function attr(node, attribute, value) {
   if (value == null) node.removeAttribute(attribute);
   else if (node.getAttribute(attribute) !== value) node.setAttribute(attribute, value);
 }
+__name(attr, "attr");
 function children(element2) {
   return Array.from(element2.childNodes);
 }
+__name(children, "children");
 function set_data(text2, data) {
   data = "" + data;
   if (text2.data === data) return;
   text2.data = /** @type {string} */
   data;
 }
+__name(set_data, "set_data");
 function set_style(node, key, value, important) {
   if (value == null) {
     node.style.removeProperty(key);
@@ -204,13 +244,19 @@ function set_style(node, key, value, important) {
     node.style.setProperty(key, value, "");
   }
 }
+__name(set_style, "set_style");
 function toggle_class(element2, name, toggle) {
   element2.classList.toggle(name, !!toggle);
 }
+__name(toggle_class, "toggle_class");
 function custom_event(type, detail, { bubbles = false, cancelable = false } = {}) {
   return new CustomEvent(type, { detail, bubbles, cancelable });
 }
+__name(custom_event, "custom_event");
 class HtmlTag {
+  static {
+    __name(this, "HtmlTag");
+  }
   /**
    * @private
    * @default false
@@ -296,6 +342,7 @@ class HtmlTag {
 function construct_svelte_component(component, props) {
   return new component(props);
 }
+__name(construct_svelte_component, "construct_svelte_component");
 const managed_styles = /* @__PURE__ */ new Map();
 let active = 0;
 function hash(str) {
@@ -304,11 +351,13 @@ function hash(str) {
   while (i--) hash2 = (hash2 << 5) - hash2 ^ str.charCodeAt(i);
   return hash2 >>> 0;
 }
+__name(hash, "hash");
 function create_style_information(doc, node) {
   const info = { stylesheet: append_empty_stylesheet(node), rules: {} };
   managed_styles.set(doc, info);
   return info;
 }
+__name(create_style_information, "create_style_information");
 function create_rule(node, a, b, duration, delay, ease, fn, uid = 0) {
   const step = 16.666 / duration;
   let keyframes = "{\n";
@@ -331,6 +380,7 @@ function create_rule(node, a, b, duration, delay, ease, fn, uid = 0) {
   active += 1;
   return name;
 }
+__name(create_rule, "create_rule");
 function delete_rule(node, name) {
   const previous = (node.style.animation || "").split(", ");
   const next = previous.filter(
@@ -344,6 +394,7 @@ function delete_rule(node, name) {
     if (!active) clear_rules();
   }
 }
+__name(delete_rule, "delete_rule");
 function clear_rules() {
   raf(() => {
     if (active) return;
@@ -354,24 +405,30 @@ function clear_rules() {
     managed_styles.clear();
   });
 }
+__name(clear_rules, "clear_rules");
 let current_component;
 function set_current_component(component) {
   current_component = component;
 }
+__name(set_current_component, "set_current_component");
 function get_current_component() {
   if (!current_component) throw new Error("Function called outside component initialization");
   return current_component;
 }
+__name(get_current_component, "get_current_component");
 function onMount(fn) {
   get_current_component().$$.on_mount.push(fn);
 }
+__name(onMount, "onMount");
 function setContext(key, context) {
   get_current_component().$$.context.set(key, context);
   return context;
 }
+__name(setContext, "setContext");
 function getContext(key) {
   return get_current_component().$$.context.get(key);
 }
+__name(getContext, "getContext");
 const dirty_components = [];
 const binding_callbacks = [];
 let render_callbacks = [];
@@ -384,12 +441,15 @@ function schedule_update() {
     resolved_promise.then(flush);
   }
 }
+__name(schedule_update, "schedule_update");
 function add_render_callback(fn) {
   render_callbacks.push(fn);
 }
+__name(add_render_callback, "add_render_callback");
 function add_flush_callback(fn) {
   flush_callbacks.push(fn);
 }
+__name(add_flush_callback, "add_flush_callback");
 const seen_callbacks = /* @__PURE__ */ new Set();
 let flushidx = 0;
 function flush() {
@@ -430,6 +490,7 @@ function flush() {
   seen_callbacks.clear();
   set_current_component(saved_component);
 }
+__name(flush, "flush");
 function update($$) {
   if ($$.fragment !== null) {
     $$.update();
@@ -440,6 +501,7 @@ function update($$) {
     $$.after_update.forEach(add_render_callback);
   }
 }
+__name(update, "update");
 function flush_render_callbacks(fns) {
   const filtered = [];
   const targets = [];
@@ -447,6 +509,7 @@ function flush_render_callbacks(fns) {
   targets.forEach((c) => c());
   render_callbacks = filtered;
 }
+__name(flush_render_callbacks, "flush_render_callbacks");
 let promise;
 function wait() {
   if (!promise) {
@@ -457,9 +520,11 @@ function wait() {
   }
   return promise;
 }
+__name(wait, "wait");
 function dispatch(node, direction, kind) {
   node.dispatchEvent(custom_event(`${direction ? "intro" : "outro"}${kind}`));
 }
+__name(dispatch, "dispatch");
 const outroing = /* @__PURE__ */ new Set();
 let outros;
 function group_outros() {
@@ -470,18 +535,21 @@ function group_outros() {
     // parent group
   };
 }
+__name(group_outros, "group_outros");
 function check_outros() {
   if (!outros.r) {
     run_all(outros.c);
   }
   outros = outros.p;
 }
+__name(check_outros, "check_outros");
 function transition_in(block, local) {
   if (block && block.i) {
     outroing.delete(block);
     block.i(local);
   }
 }
+__name(transition_in, "transition_in");
 function transition_out(block, local, detach2, callback) {
   if (block && block.o) {
     if (outroing.has(block)) return;
@@ -498,6 +566,7 @@ function transition_out(block, local, detach2, callback) {
     callback();
   }
 }
+__name(transition_out, "transition_out");
 const null_transition = { duration: 0 };
 function create_in_transition(node, fn, params) {
   const options = { direction: "in" };
@@ -509,6 +578,7 @@ function create_in_transition(node, fn, params) {
   function cleanup() {
     if (animation_name) delete_rule(node, animation_name);
   }
+  __name(cleanup, "cleanup");
   function go() {
     const {
       delay = 0,
@@ -540,6 +610,7 @@ function create_in_transition(node, fn, params) {
       return running;
     });
   }
+  __name(go, "go");
   let started = false;
   return {
     start() {
@@ -564,6 +635,7 @@ function create_in_transition(node, fn, params) {
     }
   };
 }
+__name(create_in_transition, "create_in_transition");
 function create_out_transition(node, fn, params) {
   const options = { direction: "out" };
   let config = fn(node, params, options);
@@ -607,6 +679,7 @@ function create_out_transition(node, fn, params) {
       return running;
     });
   }
+  __name(go, "go");
   if (is_function(config)) {
     wait().then(() => {
       config = config(options);
@@ -630,9 +703,11 @@ function create_out_transition(node, fn, params) {
     }
   };
 }
+__name(create_out_transition, "create_out_transition");
 function ensure_array_like(array_like_or_iterator) {
   return array_like_or_iterator?.length !== void 0 ? array_like_or_iterator : Array.from(array_like_or_iterator);
 }
+__name(ensure_array_like, "ensure_array_like");
 function get_spread_update(levels, updates) {
   const update2 = {};
   const to_null_out = {};
@@ -663,9 +738,11 @@ function get_spread_update(levels, updates) {
   }
   return update2;
 }
+__name(get_spread_update, "get_spread_update");
 function get_spread_object(spread_props) {
   return typeof spread_props === "object" && spread_props !== null ? spread_props : {};
 }
+__name(get_spread_object, "get_spread_object");
 function bind(component, name, callback) {
   const index = component.$$.props[name];
   if (index !== void 0) {
@@ -673,9 +750,11 @@ function bind(component, name, callback) {
     callback(component.$$.ctx[index]);
   }
 }
+__name(bind, "bind");
 function create_component(block) {
   block && block.c();
 }
+__name(create_component, "create_component");
 function mount_component(component, target, anchor) {
   const { fragment, after_update } = component.$$;
   fragment && fragment.m(target, anchor);
@@ -690,6 +769,7 @@ function mount_component(component, target, anchor) {
   });
   after_update.forEach(add_render_callback);
 }
+__name(mount_component, "mount_component");
 function destroy_component(component, detaching) {
   const $$ = component.$$;
   if ($$.fragment !== null) {
@@ -700,6 +780,7 @@ function destroy_component(component, detaching) {
     $$.ctx = [];
   }
 }
+__name(destroy_component, "destroy_component");
 function make_dirty(component, i) {
   if (component.$$.dirty[0] === -1) {
     dirty_components.push(component);
@@ -708,6 +789,7 @@ function make_dirty(component, i) {
   }
   component.$$.dirty[i / 31 | 0] |= 1 << i % 31;
 }
+__name(make_dirty, "make_dirty");
 function init(component, options, instance2, create_fragment2, not_equal, props, append_styles = null, dirty = [-1]) {
   const parent_component = current_component;
   set_current_component(component);
@@ -760,7 +842,11 @@ function init(component, options, instance2, create_fragment2, not_equal, props,
   }
   set_current_component(parent_component);
 }
+__name(init, "init");
 class SvelteComponent {
+  static {
+    __name(this, "SvelteComponent");
+  }
   /**
    * ### PRIVATE API
    *
@@ -818,6 +904,7 @@ function cubicOut(t) {
   const f = t - 1;
   return f * f * f + 1;
 }
+__name(cubicOut, "cubicOut");
 const s_TAG_OBJECT = "[object Object]";
 function deepMerge(target = {}, ...sourceObj) {
   if (Object.prototype.toString.call(target) !== s_TAG_OBJECT) {
@@ -830,6 +917,7 @@ function deepMerge(target = {}, ...sourceObj) {
   }
   return _deepMerge(target, ...sourceObj);
 }
+__name(deepMerge, "deepMerge");
 function hasGetter(object, accessor) {
   if (typeof object !== "object" || object === null || object === void 0) {
     return false;
@@ -846,15 +934,18 @@ function hasGetter(object, accessor) {
   }
   return false;
 }
+__name(hasGetter, "hasGetter");
 function isIterable(value) {
   if (value === null || value === void 0 || typeof value !== "object") {
     return false;
   }
   return Symbol.iterator in value;
 }
+__name(isIterable, "isIterable");
 function isObject(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
 }
+__name(isObject, "isObject");
 function isPlainObject(value) {
   if (Object.prototype.toString.call(value) !== s_TAG_OBJECT) {
     return false;
@@ -862,6 +953,7 @@ function isPlainObject(value) {
   const prototype = Object.getPrototypeOf(value);
   return prototype === null || prototype === Object.prototype;
 }
+__name(isPlainObject, "isPlainObject");
 function safeAccess(data, accessor, defaultValue) {
   if (typeof data !== "object") {
     return defaultValue;
@@ -878,6 +970,7 @@ function safeAccess(data, accessor, defaultValue) {
   }
   return data;
 }
+__name(safeAccess, "safeAccess");
 function safeSet(data, accessor, value, operation = "set", createMissing = true) {
   if (typeof data !== "object") {
     throw new TypeError(`safeSet Error: 'data' is not an 'object'.`);
@@ -928,6 +1021,7 @@ function safeSet(data, accessor, value, operation = "set", createMissing = true)
   }
   return true;
 }
+__name(safeSet, "safeSet");
 function _deepMerge(target = {}, ...sourceObj) {
   for (let cntr = 0; cntr < sourceObj.length; cntr++) {
     const obj = sourceObj[cntr];
@@ -943,7 +1037,11 @@ function _deepMerge(target = {}, ...sourceObj) {
   }
   return target;
 }
+__name(_deepMerge, "_deepMerge");
 class A11yHelper {
+  static {
+    __name(this, "A11yHelper");
+  }
   /**
    * Apply focus to the HTMLElement targets in a given A11yFocusSource data object. An iterable list `options.focusEl`
    * can contain HTMLElements or selector strings. If multiple focus targets are provided in a list then the first
@@ -1239,6 +1337,9 @@ class A11yHelper {
   }
 }
 class StyleParse {
+  static {
+    __name(this, "StyleParse");
+  }
   static #regexPixels = /(\d+)\s*px/;
   /**
    * Parses a pixel string / computed styles. Ex. `100px` returns `100`.
@@ -1257,6 +1358,9 @@ class StyleParse {
   }
 }
 class TJSStyleManager {
+  static {
+    __name(this, "TJSStyleManager");
+  }
   /** @type {CSSStyleRule} */
   #cssRule;
   /** @type {string} */
@@ -1461,6 +1565,7 @@ function isUpdatableStore(store) {
   }
   return false;
 }
+__name(isUpdatableStore, "isUpdatableStore");
 function subscribeIgnoreFirst(store, update2) {
   let firedFirst = false;
   return store.subscribe((value) => {
@@ -1471,22 +1576,24 @@ function subscribeIgnoreFirst(store, update2) {
     }
   });
 }
+__name(subscribeIgnoreFirst, "subscribeIgnoreFirst");
 function resizeObserver(node, target) {
   ResizeObserverManager.add(node, target);
   return {
     /**
      * @param {ResizeObserverTarget} newTarget - An object or function to update with observed width & height changes.
      */
-    update: (newTarget) => {
+    update: /* @__PURE__ */ __name((newTarget) => {
       ResizeObserverManager.remove(node, target);
       target = newTarget;
       ResizeObserverManager.add(node, target);
-    },
-    destroy: () => {
+    }, "update"),
+    destroy: /* @__PURE__ */ __name(() => {
       ResizeObserverManager.remove(node, target);
-    }
+    }, "destroy")
   };
 }
+__name(resizeObserver, "resizeObserver");
 resizeObserver.updateCache = function(el) {
   if (!(el instanceof HTMLElement)) {
     throw new TypeError(`resizeObserverUpdate error: 'el' is not an HTMLElement.`);
@@ -1513,6 +1620,9 @@ resizeObserver.updateCache = function(el) {
 };
 const s_MAP = /* @__PURE__ */ new Map();
 class ResizeObserverManager {
+  static {
+    __name(this, "ResizeObserverManager");
+  }
   /**
    * Add an HTMLElement and ResizeObserverTarget instance for monitoring. Create cached style attributes for the
    * given element include border & padding dimensions for offset width / height calculations.
@@ -1630,6 +1740,7 @@ function s_GET_UPDATE_TYPE(target) {
   }
   return s_UPDATE_TYPES.none;
 }
+__name(s_GET_UPDATE_TYPE, "s_GET_UPDATE_TYPE");
 function s_UPDATE_SUBSCRIBER(subscriber, contentWidth, contentHeight) {
   const styles = subscriber.styles;
   subscriber.contentWidth = contentWidth;
@@ -1676,6 +1787,7 @@ function s_UPDATE_SUBSCRIBER(subscriber, contentWidth, contentHeight) {
       break;
   }
 }
+__name(s_UPDATE_SUBSCRIBER, "s_UPDATE_SUBSCRIBER");
 function applyStyles(node, properties) {
   function setProperties() {
     if (!isObject(properties)) {
@@ -1685,23 +1797,29 @@ function applyStyles(node, properties) {
       node.style.setProperty(`${prop}`, properties[prop]);
     }
   }
+  __name(setProperties, "setProperties");
   setProperties();
   return {
     /**
      * @param {Record<string, string>}  newProperties - Key / value object of properties to set.
      */
-    update: (newProperties) => {
+    update: /* @__PURE__ */ __name((newProperties) => {
       properties = newProperties;
       setProperties();
-    }
+    }, "update")
   };
 }
+__name(applyStyles, "applyStyles");
 function lerp(start, end, amount) {
   return (1 - amount) * start + amount * end;
 }
+__name(lerp, "lerp");
 class TJSDefaultTransition {
+  static {
+    __name(this, "TJSDefaultTransition");
+  }
   static #options = {};
-  static #default = () => void 0;
+  static #default = /* @__PURE__ */ __name(() => void 0, "#default");
   /**
    * @returns {() => undefined} Default empty transition.
    */
@@ -1721,6 +1839,7 @@ function readable(value, start) {
     subscribe: writable(value, start).subscribe
   };
 }
+__name(readable, "readable");
 function writable(value, start = noop) {
   let stop;
   const subscribers = /* @__PURE__ */ new Set();
@@ -1742,9 +1861,11 @@ function writable(value, start = noop) {
       }
     }
   }
+  __name(set, "set");
   function update2(fn) {
     set(fn(value));
   }
+  __name(update2, "update");
   function subscribe2(run2, invalidate = noop) {
     const subscriber = [run2, invalidate];
     subscribers.add(subscriber);
@@ -1760,8 +1881,10 @@ function writable(value, start = noop) {
       }
     };
   }
+  __name(subscribe2, "subscribe");
   return { set, update: update2, subscribe: subscribe2 };
 }
+__name(writable, "writable");
 function derived(stores, fn, initial_value) {
   const single = !Array.isArray(stores);
   const stores_array = single ? [stores] : stores;
@@ -1774,7 +1897,7 @@ function derived(stores, fn, initial_value) {
     const values = [];
     let pending = 0;
     let cleanup = noop;
-    const sync = () => {
+    const sync = /* @__PURE__ */ __name(() => {
       if (pending) {
         return;
       }
@@ -1785,7 +1908,7 @@ function derived(stores, fn, initial_value) {
       } else {
         cleanup = is_function(result) ? result : noop;
       }
-    };
+    }, "sync");
     const unsubscribers = stores_array.map(
       (store, i) => subscribe(
         store,
@@ -1803,14 +1926,18 @@ function derived(stores, fn, initial_value) {
     );
     started = true;
     sync();
-    return function stop() {
+    return /* @__PURE__ */ __name(function stop() {
       run_all(unsubscribers);
       cleanup();
       started = false;
-    };
+    }, "stop");
   });
 }
+__name(derived, "derived");
 class AppShellContextInternal {
+  static {
+    __name(this, "AppShellContextInternal");
+  }
   /** @type {InternalAppStores} */
   #stores;
   constructor() {
@@ -1836,6 +1963,7 @@ function isHMRProxy(comp) {
   const prototypeName = comp?.prototype?.constructor?.name;
   return typeof prototypeName === "string" && (prototypeName.startsWith("Proxy<") || prototypeName === "ProxyComponent");
 }
+__name(isHMRProxy, "isHMRProxy");
 function isSvelteComponent(comp) {
   if (comp === null || comp === void 0 || typeof comp !== "function") {
     return false;
@@ -1849,6 +1977,7 @@ function isSvelteComponent(comp) {
     typeof comp.render === "function"
   );
 }
+__name(isSvelteComponent, "isSvelteComponent");
 async function outroAndDestroy(instance2) {
   return new Promise((resolve) => {
     if (instance2.$$.fragment && instance2.$$.fragment.o) {
@@ -1864,6 +1993,7 @@ async function outroAndDestroy(instance2) {
     }
   });
 }
+__name(outroAndDestroy, "outroAndDestroy");
 function parseTJSSvelteConfig(config, thisArg = void 0) {
   if (!isObject(config)) {
     throw new TypeError(`parseSvelteConfig - 'config' is not an object:
@@ -1988,6 +2118,7 @@ ${JSON.stringify(config)}`);
   svelteConfig.context.set("#external", externalContext);
   return svelteConfig;
 }
+__name(parseTJSSvelteConfig, "parseTJSSvelteConfig");
 function s_PROCESS_PROPS(props, thisArg, config) {
   if (typeof props === "function") {
     const result = props.call(thisArg);
@@ -2007,14 +2138,16 @@ ${JSON.stringify(config)}`
   }
   return {};
 }
+__name(s_PROCESS_PROPS, "s_PROCESS_PROPS");
 function localize$1(stringId, data) {
   const result = !isObject(data) ? globalThis.game.i18n.localize(stringId) : globalThis.game.i18n.format(stringId, data);
   return result !== void 0 ? result : "";
 }
+__name(localize$1, "localize$1");
 function writableDerived(origins, derive, reflect, initial) {
   var childDerivedSetter, originValues, blockNextDerive = false;
   var reflectOldValues = reflect.length >= 2;
-  var wrappedDerive = (got, set, update3) => {
+  var wrappedDerive = /* @__PURE__ */ __name((got, set, update3) => {
     childDerivedSetter = set;
     if (reflectOldValues) {
       originValues = got;
@@ -2028,7 +2161,7 @@ function writableDerived(origins, derive, reflect, initial) {
       }
     }
     blockNextDerive = false;
-  };
+  }, "wrappedDerive");
   var childDerived = derived(origins, wrappedDerive, initial);
   var singleOrigin = !Array.isArray(origins);
   function doReflect(reflecting) {
@@ -2044,6 +2177,7 @@ function writableDerived(origins, derive, reflect, initial) {
     }
     blockNextDerive = false;
   }
+  __name(doReflect, "doReflect");
   var tryingSet = false;
   function update2(fn) {
     var isUpdated, mutatedBySubscriptions, oldValue, newValue;
@@ -2073,6 +2207,7 @@ function writableDerived(origins, derive, reflect, initial) {
       doReflect(newValue);
     }
   }
+  __name(update2, "update");
   return {
     subscribe: childDerived.subscribe,
     set(value) {
@@ -2081,6 +2216,7 @@ function writableDerived(origins, derive, reflect, initial) {
     update: update2
   };
 }
+__name(writableDerived, "writableDerived");
 function propertyStore(origin, propName) {
   if (!Array.isArray(propName)) {
     return writableDerived(
@@ -2112,6 +2248,7 @@ function propertyStore(origin, propName) {
     );
   }
 }
+__name(propertyStore, "propertyStore");
 const EPSILON = 1e-6;
 const IDENTITY_4X4 = new Float32Array([
   1,
@@ -2132,6 +2269,9 @@ const IDENTITY_4X4 = new Float32Array([
   1
 ]);
 class Mat4 extends Float32Array {
+  static {
+    __name(this, "Mat4");
+  }
   /**
    * The number of bytes in a {@link Mat4}.
    */
@@ -4181,6 +4321,9 @@ Mat4.mul = Mat4.multiply;
 Mat4.perspective = Mat4.perspectiveNO;
 Mat4.ortho = Mat4.orthoNO;
 class Vec3 extends Float32Array {
+  static {
+    __name(this, "Vec3");
+  }
   /**
   * The number of bytes in a {@link Vec3}.
   */
@@ -5245,13 +5388,19 @@ async function nextAnimationFrame(cntr = 1) {
   }
   return currentTime;
 }
+__name(nextAnimationFrame, "nextAnimationFrame");
 function clamp(value = 0, min = 0, max = 0) {
   return Math.min(Math.max(value, min), max);
 }
+__name(clamp, "clamp");
 function degToRad(deg) {
   return deg * (Math.PI / 180);
 }
+__name(degToRad, "degToRad");
 class AnimationControl {
+  static {
+    __name(this, "AnimationControl");
+  }
   /** @type {object} */
   #animationData;
   /** @type {Promise<void>} */
@@ -5325,6 +5474,9 @@ class AnimationControl {
   }
 }
 class AnimationManager {
+  static {
+    __name(this, "AnimationManager");
+  }
   /**
    * @type {object[]}
    */
@@ -5534,6 +5686,7 @@ function setNumericDefaults(data) {
     data.rotation = 0;
   }
 }
+__name(setNumericDefaults, "setNumericDefaults");
 const transformKeysBitwise = {
   rotateX: 1,
   rotateY: 2,
@@ -5588,7 +5741,11 @@ function convertRelative(positionData, position) {
     }
   }
 }
+__name(convertRelative, "convertRelative");
 class AnimationAPI {
+  static {
+    __name(this, "AnimationAPI");
+  }
   /** @type {import('../').TJSPositionData} */
   #data;
   /** @type {import('../').TJSPosition} */
@@ -5957,7 +6114,7 @@ class AnimationAPI {
       resolve: void 0,
       start: void 0
     };
-    const quickToCB = (...args) => {
+    const quickToCB = /* @__PURE__ */ __name((...args) => {
       const argsLength = args.length;
       if (argsLength === 0) {
         return;
@@ -5999,7 +6156,7 @@ class AnimationAPI {
         animationData.start = now2 + (AnimationManager.current - now2);
         animationData.current = 0;
       }
-    };
+    }, "quickToCB");
     quickToCB.keys = keysArray;
     quickToCB.options = ({ duration: duration2, ease: ease2, interpolate: interpolate2 } = {}) => {
       if (duration2 !== void 0 && (!Number.isFinite(duration2) || duration2 < 0)) {
@@ -6026,6 +6183,9 @@ class AnimationAPI {
   }
 }
 class AnimationGroupControl {
+  static {
+    __name(this, "AnimationGroupControl");
+  }
   /** @type {import('./AnimationControl').AnimationControl[]} */
   #animationControls;
   /** @type {Promise<Awaited<unknown>[]>} */
@@ -6121,6 +6281,9 @@ class AnimationGroupControl {
   }
 }
 class AnimationGroupAPI {
+  static {
+    __name(this, "AnimationGroupAPI");
+  }
   /**
    * Checks of the given object is a TJSPosition instance by checking for AnimationAPI.
    *
@@ -6574,7 +6737,7 @@ class AnimationGroupAPI {
     }
     const keysArray = [...keys];
     Object.freeze(keysArray);
-    const quickToCB = (...args) => {
+    const quickToCB = /* @__PURE__ */ __name((...args) => {
       const argsLength = args.length;
       if (argsLength === 0) {
         return;
@@ -6636,7 +6799,7 @@ class AnimationGroupAPI {
           quickToCallbacks[cntr](...args);
         }
       }
-    };
+    }, "quickToCB");
     quickToCB.keys = keysArray;
     quickToCB.options = (options2) => {
       if (options2 !== void 0 && !isObject(options2) && typeof options2 !== "function") {
@@ -6699,6 +6862,9 @@ class AnimationGroupAPI {
   }
 }
 class Centered {
+  static {
+    __name(this, "Centered");
+  }
   /**
    * @type {HTMLElement}
    */
@@ -6841,6 +7007,9 @@ class Centered {
   }
 }
 class PositionChangeSet {
+  static {
+    __name(this, "PositionChangeSet");
+  }
   constructor() {
     this.left = false;
     this.top = false;
@@ -6872,6 +7041,9 @@ class PositionChangeSet {
   }
 }
 class TJSPositionData {
+  static {
+    __name(this, "TJSPositionData");
+  }
   constructor({
     height = null,
     left = null,
@@ -6939,6 +7111,9 @@ class TJSPositionData {
   }
 }
 class PositionStateAPI {
+  static {
+    __name(this, "PositionStateAPI");
+  }
   /** @type {import('./TJSPositionData').TJSPositionData} */
   #data;
   /**
@@ -7139,6 +7314,9 @@ class PositionStateAPI {
   }
 }
 class StyleCache {
+  static {
+    __name(this, "StyleCache");
+  }
   constructor() {
     this.el = void 0;
     this.computed = void 0;
@@ -7241,6 +7419,9 @@ class StyleCache {
   }
 }
 class TJSTransformData {
+  static {
+    __name(this, "TJSTransformData");
+  }
   constructor() {
     Object.seal(this);
   }
@@ -7306,6 +7487,9 @@ const s_MAT4_RESULT = Mat4.create();
 const s_MAT4_TEMP = Mat4.create();
 const s_VEC3_TEMP = Vec3.create();
 class TJSTransforms {
+  static {
+    __name(this, "TJSTransforms");
+  }
   /**
    * Stores the transform keys in the order added.
    *
@@ -7913,7 +8097,11 @@ function s_GET_ORIGIN_TRANSLATION(transformOrigin, width, height, output) {
   }
   return output;
 }
+__name(s_GET_ORIGIN_TRANSLATION, "s_GET_ORIGIN_TRANSLATION");
 class AdapterValidators {
+  static {
+    __name(this, "AdapterValidators");
+  }
   /** @type {boolean} */
   #enabled = true;
   /**
@@ -8107,6 +8295,9 @@ class AdapterValidators {
   }
 }
 class BasicBounds {
+  static {
+    __name(this, "BasicBounds");
+  }
   /**
    * When true constrains the min / max width or height to element.
    *
@@ -8264,6 +8455,9 @@ class BasicBounds {
 }
 const s_TRANSFORM_DATA = new TJSTransformData();
 class TransformBounds {
+  static {
+    __name(this, "TransformBounds");
+  }
   /**
    * When true constrains the min / max width or height to element.
    *
@@ -8427,6 +8621,9 @@ class TransformBounds {
   }
 }
 class UpdateElementData {
+  static {
+    __name(this, "UpdateElementData");
+  }
   constructor() {
     this.data = void 0;
     this.dataSubscribers = new TJSPositionData();
@@ -8448,6 +8645,9 @@ class UpdateElementData {
   }
 }
 class UpdateElementManager {
+  static {
+    __name(this, "UpdateElementManager");
+  }
   static list = [];
   static listCntr = 0;
   static updatePromise;
@@ -8579,6 +8779,7 @@ function s_UPDATE_ELEMENT(el, updateData) {
     el.style.transform = updateData.transforms.isActive ? updateData.transforms.getCSS() : null;
   }
 }
+__name(s_UPDATE_ELEMENT, "s_UPDATE_ELEMENT");
 function s_UPDATE_ELEMENT_ORTHO(el, updateData) {
   const changeSet = updateData.changeSet;
   const data = updateData.data;
@@ -8598,6 +8799,7 @@ function s_UPDATE_ELEMENT_ORTHO(el, updateData) {
     el.style.transform = updateData.transforms.getCSSOrtho(data);
   }
 }
+__name(s_UPDATE_ELEMENT_ORTHO, "s_UPDATE_ELEMENT_ORTHO");
 function s_UPDATE_TRANSFORM(el, updateData) {
   s_VALIDATION_DATA$1.height = updateData.data.height !== "auto" ? updateData.data.height : updateData.styleCache.offsetHeight;
   s_VALIDATION_DATA$1.width = updateData.data.width !== "auto" ? updateData.data.width : updateData.styleCache.offsetWidth;
@@ -8606,6 +8808,7 @@ function s_UPDATE_TRANSFORM(el, updateData) {
   updateData.transforms.getData(updateData.data, updateData.transformData, s_VALIDATION_DATA$1);
   updateData.storeTransform.set(updateData.transformData);
 }
+__name(s_UPDATE_TRANSFORM, "s_UPDATE_TRANSFORM");
 const s_VALIDATION_DATA$1 = {
   height: void 0,
   width: void 0,
@@ -8613,6 +8816,9 @@ const s_VALIDATION_DATA$1 = {
   marginTop: void 0
 };
 class TJSPosition {
+  static {
+    __name(this, "TJSPosition");
+  }
   /**
    * @type {{browserCentered: Centered, Centered: Centered}}
    */
@@ -9705,6 +9911,7 @@ function draggable(node, {
     node.addEventListener(...handlers.dragDown);
     node.classList.add("draggable");
   }
+  __name(activateListeners, "activateListeners");
   function removeListeners() {
     if (typeof storeDragging?.set === "function") {
       storeDragging.set(false);
@@ -9714,6 +9921,7 @@ function draggable(node, {
     node.removeEventListener(...handlers.dragUp);
     node.classList.remove("draggable");
   }
+  __name(removeListeners, "removeListeners");
   if (active2) {
     activateListeners();
   }
@@ -9751,6 +9959,7 @@ function draggable(node, {
     node.addEventListener(...handlers.dragUp);
     node.setPointerCapture(event.pointerId);
   }
+  __name(onDragPointerDown, "onDragPointerDown");
   function onDragPointerChange(event) {
     if ((event.buttons & 1) === 0) {
       onDragPointerUp(event);
@@ -9774,6 +9983,7 @@ function draggable(node, {
       position.set(positionData);
     }
   }
+  __name(onDragPointerChange, "onDragPointerChange");
   function onDragPointerUp(event) {
     event.preventDefault();
     dragging = false;
@@ -9783,9 +9993,10 @@ function draggable(node, {
     node.removeEventListener(...handlers.dragMove);
     node.removeEventListener(...handlers.dragUp);
   }
+  __name(onDragPointerUp, "onDragPointerUp");
   return {
     // The default of active being true won't automatically add listeners twice.
-    update: (options) => {
+    update: /* @__PURE__ */ __name((options) => {
       if (typeof options.active === "boolean") {
         active2 = options.active;
         if (active2) {
@@ -9822,11 +10033,15 @@ function draggable(node, {
           ignoreTargetClassList = options.ignoreTargetClassList;
         }
       }
-    },
-    destroy: () => removeListeners()
+    }, "update"),
+    destroy: /* @__PURE__ */ __name(() => removeListeners(), "destroy")
   };
 }
+__name(draggable, "draggable");
 class DraggableOptions {
+  static {
+    __name(this, "DraggableOptions");
+  }
   #ease = false;
   /**
    * @type {{ duration: number, ease: (t: number) => number | string }}
@@ -9848,23 +10063,23 @@ class DraggableOptions {
    */
   constructor({ ease, easeOptions } = {}) {
     Object.defineProperty(this, "ease", {
-      get: () => {
+      get: /* @__PURE__ */ __name(() => {
         return this.#ease;
-      },
-      set: (newEase) => {
+      }, "get"),
+      set: /* @__PURE__ */ __name((newEase) => {
         if (typeof newEase !== "boolean") {
           throw new TypeError(`'ease' is not a boolean.`);
         }
         this.#ease = newEase;
         this.#updateSubscribers();
-      },
+      }, "set"),
       enumerable: true
     });
     Object.defineProperty(this, "easeOptions", {
-      get: () => {
+      get: /* @__PURE__ */ __name(() => {
         return this.#easeOptions;
-      },
-      set: (newEaseOptions) => {
+      }, "get"),
+      set: /* @__PURE__ */ __name((newEaseOptions) => {
         if (!isObject(newEaseOptions)) {
           throw new TypeError(`'easeOptions' is not an object.`);
         }
@@ -9884,7 +10099,7 @@ class DraggableOptions {
           this.#easeOptions.ease = newEaseOptions.ease;
         }
         this.#updateSubscribers();
-      },
+      }, "set"),
       enumerable: true
     });
     if (ease !== void 0) {
@@ -10017,6 +10232,7 @@ function create_if_block$2(ctx) {
     }
   };
 }
+__name(create_if_block$2, "create_if_block$2");
 function create_fragment$5(ctx) {
   let a;
   let html_tag;
@@ -10157,6 +10373,7 @@ function create_fragment$5(ctx) {
     }
   };
 }
+__name(create_fragment$5, "create_fragment$5");
 const s_REGEX_HTML = /^\s*<.*>$/;
 function instance$5($$self, $$props, $$invalidate) {
   let title;
@@ -10173,6 +10390,7 @@ function instance$5($$self, $$props, $$invalidate) {
       $$invalidate(0, button);
     }
   }
+  __name(onClick, "onClick");
   function onContextMenu(event) {
     const invoke = button?.onContextMenu;
     if (typeof invoke === "function") {
@@ -10180,12 +10398,14 @@ function instance$5($$self, $$props, $$invalidate) {
       $$invalidate(0, button);
     }
   }
+  __name(onContextMenu, "onContextMenu");
   function onKeydown(event) {
     if (event.code === keyCode) {
       event.preventDefault();
       event.stopPropagation();
     }
   }
+  __name(onKeydown, "onKeydown");
   function onKeyup(event) {
     if (event.code === keyCode) {
       const invoke = button.onPress ?? button.onclick;
@@ -10197,6 +10417,7 @@ function instance$5($$self, $$props, $$invalidate) {
       event.stopPropagation();
     }
   }
+  __name(onKeyup, "onKeyup");
   $$self.$$set = ($$props2) => {
     if ("button" in $$props2) $$invalidate(0, button = $$props2.button);
   };
@@ -10239,7 +10460,11 @@ function instance$5($$self, $$props, $$invalidate) {
     title
   ];
 }
+__name(instance$5, "instance$5");
 class TJSHeaderButton extends SvelteComponent {
+  static {
+    __name(this, "TJSHeaderButton");
+  }
   constructor(options) {
     super();
     init(this, options, instance$5, create_fragment$5, safe_not_equal, { button: 0 });
@@ -10257,11 +10482,13 @@ function get_each_context(ctx, list, i) {
   child_ctx[31] = list[i];
   return child_ctx;
 }
+__name(get_each_context, "get_each_context");
 function get_each_context_1(ctx, list, i) {
   const child_ctx = ctx.slice();
   child_ctx[31] = list[i];
   return child_ctx;
 }
+__name(get_each_context_1, "get_each_context_1");
 function create_if_block$1(ctx) {
   let img;
   let img_src_value;
@@ -10290,6 +10517,7 @@ function create_if_block$1(ctx) {
     }
   };
 }
+__name(create_if_block$1, "create_if_block$1");
 function create_each_block_1(ctx) {
   let switch_instance;
   let switch_instance_anchor;
@@ -10316,6 +10544,7 @@ function create_each_block_1(ctx) {
     }
     return { props: switch_instance_props };
   }
+  __name(switch_props, "switch_props");
   if (switch_value) {
     switch_instance = construct_svelte_component(switch_value, switch_props(ctx));
   }
@@ -10375,6 +10604,7 @@ function create_each_block_1(ctx) {
     }
   };
 }
+__name(create_each_block_1, "create_each_block_1");
 function create_each_block(ctx) {
   let switch_instance;
   let switch_instance_anchor;
@@ -10401,6 +10631,7 @@ function create_each_block(ctx) {
     }
     return { props: switch_instance_props };
   }
+  __name(switch_props, "switch_props");
   if (switch_value) {
     switch_instance = construct_svelte_component(switch_value, switch_props(ctx));
   }
@@ -10460,6 +10691,7 @@ function create_each_block(ctx) {
     }
   };
 }
+__name(create_each_block, "create_each_block");
 function create_key_block(ctx) {
   let header;
   let t0;
@@ -10488,9 +10720,9 @@ function create_key_block(ctx) {
   for (let i = 0; i < each_value_1.length; i += 1) {
     each_blocks_1[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
   }
-  const out = (i) => transition_out(each_blocks_1[i], 1, 1, () => {
+  const out = /* @__PURE__ */ __name((i) => transition_out(each_blocks_1[i], 1, 1, () => {
     each_blocks_1[i] = null;
-  });
+  }), "out");
   let each_value = ensure_array_like(
     /*buttonsRight*/
     ctx[2]
@@ -10499,9 +10731,9 @@ function create_key_block(ctx) {
   for (let i = 0; i < each_value.length; i += 1) {
     each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
   }
-  const out_1 = (i) => transition_out(each_blocks[i], 1, 1, () => {
+  const out_1 = /* @__PURE__ */ __name((i) => transition_out(each_blocks[i], 1, 1, () => {
     each_blocks[i] = null;
-  });
+  }), "out_1");
   return {
     c() {
       header = element("header");
@@ -10700,6 +10932,7 @@ function create_key_block(ctx) {
     }
   };
 }
+__name(create_key_block, "create_key_block");
 function create_fragment$4(ctx) {
   let previous_key = (
     /*draggable*/
@@ -10750,6 +10983,7 @@ function create_fragment$4(ctx) {
     }
   };
 }
+__name(create_fragment$4, "create_fragment$4");
 function instance$4($$self, $$props, $$invalidate) {
   let $focusKeep;
   let $focusAuto;
@@ -10790,31 +11024,34 @@ function instance$4($$self, $$props, $$invalidate) {
   let buttonsLeft;
   let buttonsRight;
   function minimizable(node, booleanStore) {
-    const callback = (event) => {
+    const callback = /* @__PURE__ */ __name((event) => {
       if (event.target.classList.contains("window-title") || event.target.classList.contains("window-header") || event.target.classList.contains("keep-minimized")) {
         application._onToggleMinimize(event);
       }
-    };
+    }, "callback");
     function activateListeners() {
       node.addEventListener("dblclick", callback);
     }
+    __name(activateListeners, "activateListeners");
     function removeListeners() {
       node.removeEventListener("dblclick", callback);
     }
+    __name(removeListeners, "removeListeners");
     if (booleanStore) {
       activateListeners();
     }
     return {
-      update: (booleanStore2) => {
+      update: /* @__PURE__ */ __name((booleanStore2) => {
         if (booleanStore2) {
           activateListeners();
         } else {
           removeListeners();
         }
-      },
-      destroy: () => removeListeners()
+      }, "update"),
+      destroy: /* @__PURE__ */ __name(() => removeListeners(), "destroy")
     };
   }
+  __name(minimizable, "minimizable");
   function onPointerdown(event) {
     const rootEl = $elementRoot;
     if ($focusAuto && rootEl instanceof HTMLElement && rootEl?.isConnected) {
@@ -10830,6 +11067,7 @@ function instance$4($$self, $$props, $$invalidate) {
       }
     }
   }
+  __name(onPointerdown, "onPointerdown");
   $$self.$$set = ($$props2) => {
     if ("draggable" in $$props2) $$invalidate(0, draggable$1 = $$props2.draggable);
     if ("draggableOptions" in $$props2) $$invalidate(20, draggableOptions = $$props2.draggableOptions);
@@ -10903,7 +11141,11 @@ function instance$4($$self, $$props, $$invalidate) {
     $storeDraggable
   ];
 }
+__name(instance$4, "instance$4");
 class TJSApplicationHeader extends SvelteComponent {
+  static {
+    __name(this, "TJSApplicationHeader");
+  }
   constructor(options) {
     super();
     init(this, options, instance$4, create_fragment$4, safe_not_equal, { draggable: 0, draggableOptions: 20 }, null, [-1, -1]);
@@ -10945,6 +11187,7 @@ function create_fragment$3(ctx) {
     }
   };
 }
+__name(create_fragment$3, "create_fragment$3");
 function instance$3($$self, $$props, $$invalidate) {
   let { elementRoot = void 0 } = $$props;
   let { enabled = true } = $$props;
@@ -10962,12 +11205,14 @@ function instance$3($$self, $$props, $$invalidate) {
       }
     }
   }
+  __name(onFocus, "onFocus");
   function div_binding($$value) {
     binding_callbacks[$$value ? "unshift" : "push"](() => {
       wrapEl = $$value;
       $$invalidate(0, wrapEl);
     });
   }
+  __name(div_binding, "div_binding");
   $$self.$$set = ($$props2) => {
     if ("elementRoot" in $$props2) $$invalidate(2, elementRoot = $$props2.elementRoot);
     if ("enabled" in $$props2) $$invalidate(3, enabled = $$props2.enabled);
@@ -10982,7 +11227,11 @@ function instance$3($$self, $$props, $$invalidate) {
   };
   return [wrapEl, onFocus, elementRoot, enabled, div_binding];
 }
+__name(instance$3, "instance$3");
 class TJSFocusWrap extends SvelteComponent {
+  static {
+    __name(this, "TJSFocusWrap");
+  }
   constructor(options) {
     super();
     init(this, options, instance$3, create_fragment$3, safe_not_equal, { elementRoot: 2, enabled: 3 });
@@ -11042,6 +11291,7 @@ function create_fragment$2(ctx) {
     }
   };
 }
+__name(create_fragment$2, "create_fragment$2");
 function instance$2($$self, $$props, $$invalidate) {
   let $storeElementRoot;
   let $storeMinimized;
@@ -11070,6 +11320,7 @@ function instance$2($$self, $$props, $$invalidate) {
       $$invalidate(7, isResizable = true);
       node.style.display = "block";
     }
+    __name(activateListeners, "activateListeners");
     function removeListeners() {
       if (typeof storeResizing2?.set === "function") {
         storeResizing2.set(false);
@@ -11080,6 +11331,7 @@ function instance$2($$self, $$props, $$invalidate) {
       node.style.display = "none";
       $$invalidate(7, isResizable = false);
     }
+    __name(removeListeners, "removeListeners");
     if (active2) {
       activateListeners();
     } else {
@@ -11100,6 +11352,7 @@ function instance$2($$self, $$props, $$invalidate) {
       node.addEventListener(...handlers.resizeUp);
       node.setPointerCapture(event.pointerId);
     }
+    __name(onResizePointerDown, "onResizePointerDown");
     function onResizePointerMove(event) {
       event.preventDefault();
       if (!resizing && typeof storeResizing2?.set === "function") {
@@ -11111,6 +11364,7 @@ function instance$2($$self, $$props, $$invalidate) {
         height: position.height + (event.clientY - initialPosition.y)
       });
     }
+    __name(onResizePointerMove, "onResizePointerMove");
     function onResizePointerUp(event) {
       resizing = false;
       if (typeof storeResizing2?.set === "function") {
@@ -11121,23 +11375,26 @@ function instance$2($$self, $$props, $$invalidate) {
       node.removeEventListener(...handlers.resizeUp);
       application?._onResize?.(event);
     }
+    __name(onResizePointerUp, "onResizePointerUp");
     return {
-      update: ({ active: active3 }) => {
+      update: /* @__PURE__ */ __name(({ active: active3 }) => {
         if (active3) {
           activateListeners();
         } else {
           removeListeners();
         }
-      },
-      destroy: () => removeListeners()
+      }, "update"),
+      destroy: /* @__PURE__ */ __name(() => removeListeners(), "destroy")
     };
   }
+  __name(resizable, "resizable");
   function div_binding($$value) {
     binding_callbacks[$$value ? "unshift" : "push"](() => {
       elementResize = $$value;
       $$invalidate(0, elementResize), $$invalidate(7, isResizable), $$invalidate(9, $storeMinimized), $$invalidate(8, $storeElementRoot);
     });
   }
+  __name(div_binding, "div_binding");
   $$self.$$set = ($$props2) => {
     if ("isResizable" in $$props2) $$invalidate(7, isResizable = $$props2.isResizable);
   };
@@ -11167,7 +11424,11 @@ function instance$2($$self, $$props, $$invalidate) {
     div_binding
   ];
 }
+__name(instance$2, "instance$2");
 class ResizableHandle extends SvelteComponent {
+  static {
+    __name(this, "ResizableHandle");
+  }
   constructor(options) {
     super();
     init(this, options, instance$2, create_fragment$2, safe_not_equal, { isResizable: 7 });
@@ -11420,6 +11681,7 @@ function create_else_block(ctx) {
     }
   };
 }
+__name(create_else_block, "create_else_block");
 function create_if_block(ctx) {
   let div;
   let tjsapplicationheader;
@@ -11682,6 +11944,7 @@ function create_if_block(ctx) {
     }
   };
 }
+__name(create_if_block, "create_if_block");
 function create_fragment$1(ctx) {
   let current_block_type_index;
   let if_block;
@@ -11697,6 +11960,7 @@ function create_fragment$1(ctx) {
     ) return 0;
     return 1;
   }
+  __name(select_block_type, "select_block_type");
   current_block_type_index = select_block_type(ctx);
   if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
   return {
@@ -11748,6 +12012,7 @@ function create_fragment$1(ctx) {
     }
   };
 }
+__name(create_fragment$1, "create_fragment$1");
 function instance$1($$self, $$props, $$invalidate) {
   let $focusKeep;
   let $focusAuto;
@@ -11810,6 +12075,7 @@ function instance$1($$self, $$props, $$invalidate) {
       }
     }
   }
+  __name(onClosePopup, "onClosePopup");
   function onKeydown(event) {
     if ((event.target === elementRoot || event.target === elementContent) && KeyboardManager && KeyboardManager?._getMatchingActions?.(KeyboardManager?.getKeyboardEventContext?.(event))?.length) {
       event.target?.blur();
@@ -11831,11 +12097,13 @@ function instance$1($$self, $$props, $$invalidate) {
       application.bringToTop.call(application);
     }
   }
+  __name(onKeydown, "onKeydown");
   function onPointerdownApp() {
     if (typeof application?.options?.popOut === "boolean" && application.options.popOut && application !== globalThis.ui?.activeWindow) {
       application.bringToTop.call(application);
     }
   }
+  __name(onPointerdownApp, "onPointerdownApp");
   function onPointerdownContent(event) {
     const focusable = A11yHelper.isFocusable(event.target);
     if (!focusable && $focusAuto) {
@@ -11851,10 +12119,12 @@ function instance$1($$self, $$props, $$invalidate) {
       }
     }
   }
+  __name(onPointerdownContent, "onPointerdownContent");
   function resizeObservedContent(offsetWidth, offsetHeight) {
     $$invalidate(27, contentOffsetWidth = offsetWidth);
     $$invalidate(26, contentOffsetHeight = offsetHeight);
   }
+  __name(resizeObservedContent, "resizeObservedContent");
   function resizeObservedApp(offsetWidth, offsetHeight, contentWidth, contentHeight) {
     application.position.stores.resizeObserved.update((object) => {
       object.contentWidth = contentWidth;
@@ -11866,30 +12136,35 @@ function instance$1($$self, $$props, $$invalidate) {
     $$invalidate(24, appOffsetHeight = offsetHeight);
     $$invalidate(25, appOffsetWidth = offsetWidth);
   }
+  __name(resizeObservedApp, "resizeObservedApp");
   function section_binding($$value) {
     binding_callbacks[$$value ? "unshift" : "push"](() => {
       elementContent = $$value;
       $$invalidate(0, elementContent);
     });
   }
+  __name(section_binding, "section_binding");
   function div_binding($$value) {
     binding_callbacks[$$value ? "unshift" : "push"](() => {
       elementRoot = $$value;
       $$invalidate(1, elementRoot);
     });
   }
+  __name(div_binding, "div_binding");
   function section_binding_1($$value) {
     binding_callbacks[$$value ? "unshift" : "push"](() => {
       elementContent = $$value;
       $$invalidate(0, elementContent);
     });
   }
+  __name(section_binding_1, "section_binding_1");
   function div_binding_1($$value) {
     binding_callbacks[$$value ? "unshift" : "push"](() => {
       elementRoot = $$value;
       $$invalidate(1, elementRoot);
     });
   }
+  __name(div_binding_1, "div_binding_1");
   $$self.$$set = ($$props2) => {
     if ("elementContent" in $$props2) $$invalidate(0, elementContent = $$props2.elementContent);
     if ("elementRoot" in $$props2) $$invalidate(1, elementRoot = $$props2.elementRoot);
@@ -12020,7 +12295,11 @@ function instance$1($$self, $$props, $$invalidate) {
     div_binding_1
   ];
 }
+__name(instance$1, "instance$1");
 class ApplicationShell extends SvelteComponent {
+  static {
+    __name(this, "ApplicationShell");
+  }
   constructor(options) {
     super();
     init(
@@ -12204,6 +12483,7 @@ function localize(string) {
   if (typeof game === "undefined") return string;
   return game.i18n.localize(`${MODULE_CODE}.${string}`);
 }
+__name(localize, "localize");
 function create_default_slot(ctx) {
   let main;
   let img0;
@@ -12212,11 +12492,12 @@ function create_default_slot(ctx) {
   let div0;
   let input;
   let div1;
-  let span;
+  let span0;
   let footer;
   let div3;
   let div4;
   let h4;
+  let span1;
   let a;
   let mounted;
   let dispose;
@@ -12228,32 +12509,34 @@ function create_default_slot(ctx) {
       div0 = element("div");
       input = element("input");
       div1 = element("div");
-      span = element("span");
-      span.textContent = `${localize("Setting.DontShowWelcome.Name")}`;
+      span0 = element("span");
+      span0.textContent = `${localize("Setting.DontShowWelcome.Name")}`;
       footer = element("footer");
       div3 = element("div");
-      div3.innerHTML = `<img class="pt-sm white svelte-1p9ueqj" src="/systems/foundryvtt-final-fantasy/assets/round-table-games-logo.svg" alt="Round Table Games Logo" height="50" width="50" style="fill: white; border: none; width: auto;"/>`;
+      div3.innerHTML = `<img class="pt-sm mr-md" src="/systems/foundryvtt-final-fantasy/assets/aardvark-logo.webp" alt="Aardvark Logo" height="40" width="40" style="fill: white; border: none; width: auto;"/>`;
       div4 = element("div");
       h4 = element("h4");
-      h4.textContent = `${`${MODULE_TITLE}`}`;
+      h4.textContent = `${MODULE_TITLE} `;
+      span1 = element("span");
+      span1.textContent = "Foundry conversion by ";
       a = element("a");
-      a.textContent = "Round Table Games";
+      a.textContent = "Aardvark Games";
       if (!src_url_equal(img0.src, img0_src_value = "/modules/" + MODULE_ID + "/assets/FFXIV-player-book-cover.webp")) attr(img0, "src", img0_src_value);
       attr(img0, "alt", MODULE_TITLE);
-      attr(img0, "class", "svelte-1p9ueqj");
+      attr(img0, "class", "svelte-1owu5zo");
       attr(input, "type", "checkbox");
       attr(input, "label", localize("Setting.DontShowWelcome.Name"));
-      attr(input, "class", "svelte-1p9ueqj");
+      attr(input, "class", "svelte-1owu5zo");
       attr(div0, "class", "flex0");
       attr(div1, "class", "flex");
-      attr(div2, "class", "flexrow inset justify-vertical mb-sm dont-show svelte-1p9ueqj");
+      attr(div2, "class", "flexrow inset justify-vertical mb-sm dont-show svelte-1owu5zo");
       attr(div2, "data-tooltip", localize("Setting.DontShowWelcome.Hint"));
-      attr(main, "class", "svelte-1p9ueqj");
+      attr(main, "class", "svelte-1owu5zo");
       attr(div3, "class", "right");
-      attr(a, "href", "https://www.round-table.games");
-      attr(a, "class", "svelte-1p9ueqj");
+      attr(a, "href", "https://www.aardvark.games");
+      attr(a, "class", "svelte-1owu5zo");
       attr(div4, "class", "left pt-sm");
-      attr(footer, "class", "svelte-1p9ueqj");
+      attr(footer, "class", "svelte-1owu5zo");
     },
     m(target, anchor) {
       insert(target, main, anchor);
@@ -12264,11 +12547,12 @@ function create_default_slot(ctx) {
       input.checked = /*dontShowWelcome*/
       ctx[1];
       append(div2, div1);
-      append(div1, span);
+      append(div1, span0);
       insert(target, footer, anchor);
       append(footer, div3);
       append(footer, div4);
       append(div4, h4);
+      append(div4, span1);
       append(div4, a);
       if (!mounted) {
         dispose = [
@@ -12305,6 +12589,7 @@ function create_default_slot(ctx) {
     }
   };
 }
+__name(create_default_slot, "create_default_slot");
 function create_fragment(ctx) {
   let applicationshell;
   let updating_elementRoot;
@@ -12312,6 +12597,7 @@ function create_fragment(ctx) {
   function applicationshell_elementRoot_binding(value) {
     ctx[5](value);
   }
+  __name(applicationshell_elementRoot_binding, "applicationshell_elementRoot_binding");
   let applicationshell_props = {
     $$slots: { default: [create_default_slot] },
     $$scope: { ctx }
@@ -12362,13 +12648,14 @@ function create_fragment(ctx) {
     }
   };
 }
+__name(create_fragment, "create_fragment");
 function instance($$self, $$props, $$invalidate) {
   let dontShowWelcome2;
   let { elementRoot = void 0 } = $$props;
   const application = getContext("#external").application;
-  const handleChange = (event) => {
+  const handleChange = /* @__PURE__ */ __name((event) => {
     game.settings.set(MODULE_ID, "dontShowWelcome", event.target.checked);
-  };
+  }, "handleChange");
   let draggable2 = application.reactive.draggable;
   draggable2 = true;
   onMount(async () => {
@@ -12377,10 +12664,12 @@ function instance($$self, $$props, $$invalidate) {
     dontShowWelcome2 = this.checked;
     $$invalidate(1, dontShowWelcome2);
   }
+  __name(input_change_handler, "input_change_handler");
   function applicationshell_elementRoot_binding(value) {
     elementRoot = value;
     $$invalidate(0, elementRoot);
   }
+  __name(applicationshell_elementRoot_binding, "applicationshell_elementRoot_binding");
   $$self.$$set = ($$props2) => {
     if ("elementRoot" in $$props2) $$invalidate(0, elementRoot = $$props2.elementRoot);
   };
@@ -12400,7 +12689,11 @@ function instance($$self, $$props, $$invalidate) {
     applicationshell_elementRoot_binding
   ];
 }
+__name(instance, "instance");
 class WelcomeAppShell extends SvelteComponent {
+  static {
+    __name(this, "WelcomeAppShell");
+  }
   constructor(options) {
     super();
     init(this, options, instance, create_fragment, safe_not_equal, { elementRoot: 0 });
@@ -12414,6 +12707,9 @@ class WelcomeAppShell extends SvelteComponent {
   }
 }
 class ApplicationState {
+  static {
+    __name(this, "ApplicationState");
+  }
   /** @type {T} */
   #application;
   /** @type {Map<string, ApplicationStateData>} */
@@ -12648,6 +12944,9 @@ class ApplicationState {
   }
 }
 class GetSvelteData {
+  static {
+    __name(this, "GetSvelteData");
+  }
   /** @type {import('./types').MountedAppShell[] | null[]} */
   #applicationShellHolder;
   /** @type {import('./types').SvelteData[]} */
@@ -12759,22 +13058,25 @@ function storeGenerator({ storage, serialize = JSON.stringify, deserialize = JSO
   function isSimpleDeriver(deriver) {
     return deriver.length < 2;
   }
+  __name(isSimpleDeriver, "isSimpleDeriver");
   function storageReadable(key, value, start) {
     return {
       subscribe: storageWritable(key, value, start).subscribe
     };
   }
+  __name(storageReadable, "storageReadable");
   function storageWritable(key, value, start) {
     function wrap_start(ogSet) {
-      return start(function wrap_set(new_value) {
+      return start(/* @__PURE__ */ __name(function wrap_set(new_value) {
         if (storage) {
           storage.setItem(key, serialize(new_value));
         }
         return ogSet(new_value);
-      }, function wrap_update(fn) {
+      }, "wrap_set"), /* @__PURE__ */ __name(function wrap_update(fn) {
         set(fn(get_store_value(ogStore)));
-      });
+      }, "wrap_update"));
     }
+    __name(wrap_start, "wrap_start");
     if (storage) {
       const storageValue = storage.getItem(key);
       try {
@@ -12792,14 +13094,18 @@ function storeGenerator({ storage, serialize = JSON.stringify, deserialize = JSO
       }
       ogStore.set(new_value);
     }
+    __name(set, "set");
     function update2(fn) {
       set(fn(get_store_value(ogStore)));
     }
+    __name(update2, "update");
     function subscribe2(run2, invalidate) {
       return ogStore.subscribe(run2, invalidate);
     }
+    __name(subscribe2, "subscribe");
     return { set, update: update2, subscribe: subscribe2 };
   }
+  __name(storageWritable, "storageWritable");
   function storageDerived(key, stores, fn, initial_value) {
     const single = !Array.isArray(stores);
     const stores_array = single ? [stores] : stores;
@@ -12814,7 +13120,7 @@ function storeGenerator({ storage, serialize = JSON.stringify, deserialize = JSO
       const values = [];
       let pending = 0;
       let cleanup;
-      const sync = () => {
+      const sync = /* @__PURE__ */ __name(() => {
         if (pending) {
           return;
         }
@@ -12828,7 +13134,7 @@ function storeGenerator({ storage, serialize = JSON.stringify, deserialize = JSO
             cleanup = result;
           }
         }
-      };
+      }, "sync");
       const unsubscribers = stores_array.map((store, i) => store.subscribe((value) => {
         values[i] = value;
         pending &= ~(1 << i);
@@ -12840,12 +13146,13 @@ function storeGenerator({ storage, serialize = JSON.stringify, deserialize = JSO
       }));
       inited = true;
       sync();
-      return function stop() {
+      return /* @__PURE__ */ __name(function stop() {
         unsubscribers.forEach((unsubscriber) => unsubscriber());
         cleanup?.();
-      };
+      }, "stop");
     });
   }
+  __name(storageDerived, "storageDerived");
   return {
     readable: storageReadable,
     writable: storageWritable,
@@ -12855,8 +13162,12 @@ function storeGenerator({ storage, serialize = JSON.stringify, deserialize = JSO
     deserialize
   };
 }
+__name(storeGenerator, "storeGenerator");
 const sessionStores = storeGenerator({ storage: globalThis?.sessionStorage });
 class TJSWebStorage {
+  static {
+    __name(this, "TJSWebStorage");
+  }
   /** @type {import('./').StorageStores} */
   #storageStores;
   /**
@@ -13018,11 +13329,17 @@ class TJSWebStorage {
   }
 }
 class TJSSessionStorage extends TJSWebStorage {
+  static {
+    __name(this, "TJSSessionStorage");
+  }
   constructor() {
     super(sessionStores);
   }
 }
 class SvelteReactive {
+  static {
+    __name(this, "SvelteReactive");
+  }
   /**
    * @type {import('../SvelteApplication').SvelteApplication}
    */
@@ -13569,6 +13886,7 @@ function isApplicationShell(component) {
   }
   return compHasContract || protoHasContract;
 }
+__name(isApplicationShell, "isApplicationShell");
 function loadSvelteConfig({ app, template, config, elementRootUpdate } = {}) {
   const svelteOptions = isObject(config.options) ? config.options : {};
   let target;
@@ -13645,7 +13963,11 @@ Offending config:
   const injectHTML = !(config.target instanceof HTMLElement);
   return { config: svelteConfig, component, element: element2, injectHTML };
 }
+__name(loadSvelteConfig, "loadSvelteConfig");
 class TJSAppIndex {
+  static {
+    __name(this, "TJSAppIndex");
+  }
   /**
    * Stores all visible / rendered apps.
    *
@@ -13706,6 +14028,9 @@ class TJSAppIndex {
   }
 }
 class SvelteApplication extends Application {
+  static {
+    __name(this, "SvelteApplication");
+  }
   /**
    * Stores the first mounted component which follows the application shell contract.
    *
@@ -13790,12 +14115,12 @@ class SvelteApplication extends Application {
     });
     delete this.position;
     Object.defineProperty(this, "position", {
-      get: () => this.#position,
-      set: (position) => {
+      get: /* @__PURE__ */ __name(() => this.#position, "get"),
+      set: /* @__PURE__ */ __name((position) => {
         if (isObject(position)) {
           this.#position.set(position);
         }
-      }
+      }, "set")
     });
     this.#reactive = new SvelteReactive(this);
     this.#stores = this.#reactive.initialize();
@@ -14024,7 +14349,7 @@ class SvelteApplication extends Application {
       );
     }
     this.reactive.updateHeaderButtons();
-    const elementRootUpdate = () => {
+    const elementRootUpdate = /* @__PURE__ */ __name(() => {
       let cntr = 0;
       return (elementRoot) => {
         if (elementRoot !== null && elementRoot !== void 0 && cntr++ > 0) {
@@ -14033,7 +14358,7 @@ class SvelteApplication extends Application {
         }
         return false;
       };
-    };
+    }, "elementRootUpdate");
     if (isIterable(this.options.svelte)) {
       for (const svelteConfig of this.options.svelte) {
         const svelteData = loadSvelteConfig({
@@ -14407,8 +14732,11 @@ Hooks.on("PopOut:close", (app) => {
     app.position.enabled = true;
   }
 });
-const version = "0.0.17";
+const version = "0.0.18";
 class WelcomeApplication extends SvelteApplication {
+  static {
+    __name(this, "WelcomeApplication");
+  }
   /**
    * Default Application options
    *
@@ -14422,8 +14750,8 @@ class WelcomeApplication extends SvelteApplication {
       resizable: true,
       minimizable: true,
       width: 502,
-      height: 841,
-      // headerIcon: 'path/to/img.svg',
+      height: 836,
+      headerIcon: "systems/foundryvtt-final-fantasy/assets/aardvark-claw.webp",
       title: game.i18n.localize(`${MODULE_TITLE} v${version}`),
       svelte: {
         class: WelcomeAppShell,
@@ -14440,6 +14768,7 @@ class WelcomeApplication extends SvelteApplication {
 function registerSettings(app) {
   dontShowWelcome();
 }
+__name(registerSettings, "registerSettings");
 function dontShowWelcome() {
   game.settings.register(MODULE_ID, "dontShowWelcome", {
     name: game.i18n.localize(`${MODULE_CODE}.Setting.DontShowWelcome.Name`),
@@ -14450,6 +14779,7 @@ function dontShowWelcome() {
     type: Boolean
   });
 }
+__name(dontShowWelcome, "dontShowWelcome");
 window.log = log;
 log.level = log.DEBUG;
 Hooks.once("init", (app, html, data) => {

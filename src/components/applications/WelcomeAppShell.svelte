@@ -39,10 +39,11 @@
           span {localize('Setting.DontShowWelcome.Name')}
     footer
       .right
-        img.pt-sm.white(src="/systems/foundryvtt-final-fantasy/assets/round-table-games-logo.svg" alt="Round Table Games Logo" height="50" width="50" style="fill: white; border: none; width: auto;")
+        img.pt-sm.mr-md(src="/systems/foundryvtt-final-fantasy/assets/aardvark-logo.webp" alt="Aardvark Logo" height="40" width="40" style="fill: white; border: none; width: auto;")
       .left.pt-sm
-        h4 {`${MODULE_TITLE}`}
-        a(href="https://www.round-table.games") Round Table Games
+        h4 {MODULE_TITLE} 
+        span Foundry conversion by 
+        a(href="https://www.aardvark.games") Aardvark Games
 
 </template>
 
@@ -69,8 +70,8 @@
   footer
     border-top: 8px ridge var(--border-shadow)
     display: grid
-    grid-column-gap: 0.5rem
-    grid-template-columns: 1fr 1.5fr
+    grid-column-gap: 1rem
+    grid-template-columns: 1fr 2fr
     position: fixed
     bottom: 0
     left: 0
@@ -78,12 +79,10 @@
     background-color: #333
     color: white
     text-align: center
-    padding: 0.3em 1em
+    padding: 1em 1em 0.5em 1em
     font-size: 0.8em
+    line-height: 1.5em
     z-index: 3
-    img
-      width: 70%
-      min-width: 70px
     a
       color: white
       text-decoration: underline
