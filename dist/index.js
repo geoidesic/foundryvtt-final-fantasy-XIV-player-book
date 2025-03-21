@@ -12488,7 +12488,6 @@ function create_default_slot(ctx) {
   let main;
   let img0;
   let img0_src_value;
-  let p;
   let div2;
   let div0;
   let input;
@@ -12499,14 +12498,13 @@ function create_default_slot(ctx) {
   let div5;
   let h4;
   let div4;
+  let p;
   let mounted;
   let dispose;
   return {
     c() {
       main = element("main");
       img0 = element("img");
-      p = element("p");
-      p.textContent = `${localize("Setting.DontShowWelcome.Disclaimer")}`;
       div2 = element("div");
       div0 = element("div");
       input = element("input");
@@ -12520,28 +12518,29 @@ function create_default_slot(ctx) {
       h4 = element("h4");
       h4.textContent = `${MODULE_TITLE} `;
       div4 = element("div");
-      div4.innerHTML = `<span>Foundry conversion by </span><a href="https://www.aardvark.games" class="svelte-fkv1wj">Aardvark Games</a>`;
+      div4.innerHTML = `<span>Foundry conversion by </span><a href="https://www.aardvark.games" class="svelte-1no2s7r">Aardvark Games</a>`;
+      p = element("p");
+      p.textContent = `${localize("Setting.DontShowWelcome.Disclaimer")}`;
       if (!src_url_equal(img0.src, img0_src_value = "/modules/" + MODULE_ID + "/assets/FFXIV-player-book-cover.webp")) attr(img0, "src", img0_src_value);
       attr(img0, "alt", MODULE_TITLE);
-      attr(img0, "class", "svelte-fkv1wj");
-      attr(p, "class", "smallest lightest disclaimer svelte-fkv1wj");
+      attr(img0, "class", "svelte-1no2s7r");
       attr(input, "type", "checkbox");
       attr(input, "label", localize("Setting.DontShowWelcome.Name"));
-      attr(input, "class", "svelte-fkv1wj");
+      attr(input, "class", "svelte-1no2s7r");
       attr(div0, "class", "flex0");
       attr(div1, "class", "flex");
-      attr(div2, "class", "flexrow dont-show justify-vertical mt-sm svelte-fkv1wj");
+      attr(div2, "class", "flexrow dont-show justify-vertical svelte-1no2s7r");
       attr(div2, "data-tooltip", localize("Setting.DontShowWelcome.Hint"));
-      attr(main, "class", "relative svelte-fkv1wj");
+      attr(main, "class", "relative svelte-1no2s7r");
       attr(div3, "class", "right");
       attr(div4, "class", "smaller");
       attr(div5, "class", "left pt-sm");
-      attr(footer, "class", "svelte-fkv1wj");
+      attr(footer, "class", "svelte-1no2s7r");
+      attr(p, "class", "smallest lightest disclaimer svelte-1no2s7r");
     },
     m(target, anchor) {
       insert(target, main, anchor);
       append(main, img0);
-      append(main, p);
       append(main, div2);
       append(div2, div0);
       append(div0, input);
@@ -12554,6 +12553,7 @@ function create_default_slot(ctx) {
       append(footer, div5);
       append(div5, h4);
       append(div5, div4);
+      insert(target, p, anchor);
       if (!mounted) {
         dispose = [
           listen(
@@ -12583,6 +12583,7 @@ function create_default_slot(ctx) {
       if (detaching) {
         detach(main);
         detach(footer);
+        detach(p);
       }
       mounted = false;
       run_all(dispose);
@@ -14732,7 +14733,7 @@ Hooks.on("PopOut:close", (app) => {
     app.position.enabled = true;
   }
 });
-const version = "0.0.20";
+const version = "0.0.22";
 class WelcomeApplication extends SvelteApplication {
   static {
     __name(this, "WelcomeApplication");
