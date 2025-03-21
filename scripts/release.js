@@ -52,8 +52,6 @@ const incrementVersion = (version, type) => {
     return parts.join('.');
 };
 
-// Add this line to run yarn build before versioning
-execSync('yarn build', { stdio: 'inherit' }); // Run yarn build
 
 
 // Function to check if Ollama is running
@@ -177,6 +175,10 @@ fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 const moduleJson = JSON.parse(fs.readFileSync(moduleJsonPath, 'utf8'));
 moduleJson.version = newVersion;
 fs.writeFileSync(moduleJsonPath, JSON.stringify(moduleJson, null, 2));
+
+
+// Add this line to run yarn build before versioning
+execSync('yarn build', { stdio: 'inherit' }); // Run yarn build
 
 // Commit changes
 execSync('git add .');
