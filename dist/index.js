@@ -14733,7 +14733,7 @@ Hooks.on("PopOut:close", (app) => {
     app.position.enabled = true;
   }
 });
-const version = "0.0.23";
+const version = "1.0.0";
 class WelcomeApplication extends SvelteApplication {
   static {
     __name(this, "WelcomeApplication");
