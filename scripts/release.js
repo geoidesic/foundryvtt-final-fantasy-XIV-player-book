@@ -174,6 +174,13 @@ fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 // Update module.json
 const moduleJson = JSON.parse(fs.readFileSync(moduleJsonPath, 'utf8'));
 moduleJson.version = newVersion;
+// Update manifest and download URLs with new version
+if (moduleJson.manifest) {
+    moduleJson.manifest = moduleJson.manifest.replace(/releases\/download\/[^/]+\/module\.json/, `releases/download/${newVersion}/module.json`);
+}
+if (moduleJson.download) {
+    moduleJson.download = moduleJson.download.replace(/releases\/download\/[^/]+\/module\.zip/, `releases/download/${newVersion}/module.zip`);
+}
 fs.writeFileSync(moduleJsonPath, JSON.stringify(moduleJson, null, 2));
 
 
